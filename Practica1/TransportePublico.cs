@@ -9,14 +9,11 @@ namespace Practica1
     public abstract class TransportePublico
     {
         private int pasajeros;
-
         public TransportePublico(int pasajeros)
         {
-            this.GetPasajeros = pasajeros;         
+            this.pasajeros = pasajeros;         
         }
-
-        public int GetPasajeros { get; }
-
+        public int Pasajeros { get { return pasajeros; } }
 
         public string Avanzar()
         {

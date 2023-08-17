@@ -36,7 +36,7 @@ namespace Practica1
 
                 if (tipoDeTransporte == "1" || tipoDeTransporte == "2")
                 {
-                    if (tipoDeTransporte == "1" && contadorOmnibus <= 5)
+                    if (tipoDeTransporte == "1" && contadorOmnibus < 5)
                     {
                         Console.WriteLine("Ingrese cantidad de pasajeros de omnibus: (menor a 70)");
                         string inputCantidadPasajeros = Console.ReadLine();
@@ -45,7 +45,6 @@ namespace Practica1
                         {
                             if (cantidadPasajeros < 71 && cantidadPasajeros > 0)
                             {
-
                                 Omnibus omnibus = new Omnibus(cantidadPasajeros, $"Omnibus {contadorOmnibus + 1}");
                                 omnibuses.Add(omnibus);
 
@@ -61,12 +60,8 @@ namespace Practica1
                             Console.WriteLine("No ingreso un numero valido.");
                         }
                     }
-                    else if (tipoDeTransporte == "1" && contadorOmnibus == 5)
-                    {
-                        Console.WriteLine("Ya ingreso los 5 omnibus, no puede ingresar mas");
-                    }
 
-                    if (tipoDeTransporte == "2" && contadorTaxi <= 5)
+                    if (tipoDeTransporte == "2" && contadorTaxi < 5)
                     {
                         Console.WriteLine("Ingrese cantidad de pasajeros de taxi: (menor a 5)");
                         string inputCantidadPasajeros = Console.ReadLine();
@@ -75,7 +70,6 @@ namespace Practica1
                         {
                             if (cantidadPasajeros < 5 && cantidadPasajeros > 0)
                             {
-
                                 Taxi taxi = new Taxi(cantidadPasajeros, $"Taxi {contadorTaxi + 1}");
                                 taxis.Add(taxi);
 
@@ -91,10 +85,6 @@ namespace Practica1
                             Console.WriteLine("No ingreso un numero valido.");
                         }
                     }
-                    else if (tipoDeTransporte == "2" && contadorTaxi == 5)
-                    {
-                        Console.WriteLine("Ya ingreso los 5 taxis, no puede ingresar mas");
-                    }
                 }
                 else
                 {
@@ -107,11 +97,11 @@ namespace Practica1
 
             foreach (var item in omnibuses)
             {
-                Console.WriteLine($"{item.GetNombre} : {item.GetPasajeros} pasajeros");
+                Console.WriteLine($"{item.Nombre} : {item.Pasajeros} pasajeros");
             }
             foreach (var item in taxis)
             {
-                Console.WriteLine($"{item.GetNombre} : {item.GetPasajeros} pasajeros");
+                Console.WriteLine($"{item.Nombre} : {item.Pasajeros} pasajeros");
             }
             Console.ReadLine();
         }

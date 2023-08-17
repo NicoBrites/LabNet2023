@@ -8,12 +8,12 @@ namespace Practica1
 {
     internal class Omnibus : TransportePublico
     {
+        public string Nombre { get; }
         public Omnibus(int pasajeros, string nombre) : base(pasajeros)
         {
-            GetNombre = nombre;
+            Nombre = nombre;
         }
-
-        public string GetNombre { get; }
-
     }
+
+        
 }
