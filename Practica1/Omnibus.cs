@@ -8,8 +8,6 @@ namespace Practica1
 {
     internal class Omnibus : TransportePublico
     {
-        private string Nombre;
-
         public Omnibus(int pasajeros, string nombre) : base(pasajeros)
         {
             GetNombre = nombre;
