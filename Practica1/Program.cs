@@ -48,6 +48,8 @@ namespace Practica1
                                 Omnibus omnibus = new Omnibus(cantidadPasajeros, $"Omnibus {contadorOmnibus + 1}");
                                 omnibuses.Add(omnibus);
 
+                                Console.WriteLine("Ingreso exitoso!");
+
                                 contadorOmnibus++;
                             }
                             else
@@ -73,6 +75,8 @@ namespace Practica1
                                 Taxi taxi = new Taxi(cantidadPasajeros, $"Taxi {contadorTaxi + 1}");
                                 taxis.Add(taxi);
 
+                                Console.WriteLine("Ingreso exitoso!");
+
                                 contadorTaxi++;
                             }
                             else
@@ -92,13 +96,14 @@ namespace Practica1
                 }
             }
             Console.WriteLine("Ya ingreso todos los transportes solicitados. Muchas gracias.");
-            Console.WriteLine("A continuacion se mostraran en lista los datos de los transportes ingresados:");
+            Console.WriteLine("A continuacion se mostraran en lista los datos de los transportes ingresados: (Presione enter)");
             Console.ReadLine();
 
             foreach (var item in omnibuses)
             {
                 Console.WriteLine($"{item.Nombre} : {item.Pasajeros} pasajeros");
             }
+            Console.WriteLine("-------------------------------");
             foreach (var item in taxis)
             {
                 Console.WriteLine($"{item.Nombre} : {item.Pasajeros} pasajeros");
