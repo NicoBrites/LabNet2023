@@ -59,16 +59,6 @@ namespace Practica2
             Console.WriteLine("--------");
             Console.ReadLine();
 
-
-
-
-
-
-
-
-
-
         }
-
     }
 }
