@@ -12,21 +12,22 @@ namespace Practica2
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Porfavor ingrese un numero");
+            int numeroIngresado = int.Parse(Console.ReadLine());
 
-            int num = 10;
             int divisorError = 0;
             int divisor = 2;
 
             //EJ 1)
-            num.DividirPorCero();
+            numeroIngresado.DividirPorCero();
             Console.WriteLine("--------");
             Console.ReadLine();
 
             //EJ 2)
-            num.DivisionIngresandoDivisor(divisorError);
+            numeroIngresado.DivisionIngresandoDivisor(divisorError);
             Console.WriteLine("--------");
 
-            num.DivisionIngresandoDivisor(divisor);
+            numeroIngresado.DivisionIngresandoDivisor(divisor);
             Console.WriteLine("--------");
 
             Console.ReadLine();
