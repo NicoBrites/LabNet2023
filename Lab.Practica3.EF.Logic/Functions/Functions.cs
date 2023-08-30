@@ -108,21 +108,8 @@ ________________________________________________________________________________
 
         public static void ReturnShipperNameById()
         {
-            int opcion;
-            while (true)
-            { 
-                try
-                {
-                    Console.WriteLine("Ingrese el id: ");
-                    opcion = int.Parse(Console.ReadLine());
-                    break;
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("No ingreso un numero");
-                }
-            }
-        
+            int opcion = RequestId();
+
             ShippersLogic shippers = new ShippersLogic();
 
             bool opcionFlag = true;
@@ -140,21 +127,8 @@ ________________________________________________________________________________
         }
         public static void ReturnCategoriNameById()
         {
-            
-            int opcion;
-            while (true)
-            {
-                try
-                {
-                    Console.WriteLine("Ingrese el id: ");
-                    opcion = int.Parse(Console.ReadLine());
-                    break;
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("No ingreso un numero");
-                }
-            }
+
+            int opcion = RequestId();
 
             CategoriesLogic categories = new CategoriesLogic();
             Categories categorie = categories.GetById(opcion);
@@ -168,6 +142,22 @@ ________________________________________________________________________________
                 Console.WriteLine("No ingreso un ID existente."); 
             }
             Console.ReadLine();
+        }
+        public static int RequestId()
+        {
+            while (true)
+            {
+                try
+                {
+                    Console.WriteLine("Ingrese el id: ");
+                    int opcion = int.Parse(Console.ReadLine());
+                    return opcion;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("No ingreso un numero");
+                }
+            }
         }
     }
 }
