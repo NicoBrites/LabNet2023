@@ -19,4 +19,4 @@ namespace Lab.Practica3.EF.Logic.Functions
 
 
 }
-}
+
