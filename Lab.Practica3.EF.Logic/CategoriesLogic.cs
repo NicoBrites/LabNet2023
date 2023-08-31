@@ -46,12 +46,5 @@ namespace Lab.Practica3.EF.Logic
 
             context.SaveChanges();
         }
-        /*
-        public static string ForcedMock(string mensaje)
-        {
-            return mensaje;
-        }*/
-
-
     }
 }
