@@ -177,8 +177,10 @@ ________________________________________________________________________________
             Console.WriteLine("El id se agrega automaticamente.");
             Console.WriteLine("Ingrese nombre de la categoria :(No mayor a 15 caracteres)");
             string nombreCategoria = Console.ReadLine();
+
             Console.WriteLine("Ingrese descripcion de la categoria :");
             string descripcionCategoria = Console.ReadLine();
+
             CategoriesLogic categories = new CategoriesLogic();
             try
             {
@@ -199,8 +201,10 @@ ________________________________________________________________________________
         public static void UpdateCategoryDescriptionById()
         {
             int opcion = RequestId();
+
             Console.WriteLine("Ingrese descripcion de la categoria :");
             string descripcionCategoria = Console.ReadLine();
+
             CategoriesLogic categories = new CategoriesLogic();
             Categories categorie = categories.GetById(opcion);
 
