@@ -1,5 +1,6 @@
 ﻿using Lab.Practica3.EF.Data;
 using Lab.Practica3.EF.Logic;
+using Lab.Practica3.EF.Logic.Functions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,6 +29,8 @@ Menu Principal :
 2) Recorrer la lista de shippers e imprimir por consola el id y nombre de cada shipper
 3) Ingresar un id de una category e imprimir por consola el nombre
 4) Borra un elemento de la tabla shipper ingresando su id
+5) Inserta nueva categoria
+6) Actualiza la descripcion de una categoria por id
 0) Cerrar la aplicacion
 _______________________________________________________________________________________
             ";
@@ -71,6 +74,14 @@ ________________________________________________________________________________
                 {
                     DeleteShipperById();
                 }
+                else if (opcion == 5)
+                {
+                    InsertCategory();
+                }
+                else if (opcion == 6)
+                {
+                    UpdateCategoryDescriptionById();
+                }
                 else if (opcion == 0)
                 {
                     Console.WriteLine("Gracias por usar mi aplicacion. Presione Enter para cerrar.");
@@ -105,7 +116,6 @@ ________________________________________________________________________________
             }
             Console.ReadLine();
         }
-
         public static void ReturnCategoriNameById()
         {
 
@@ -161,13 +171,58 @@ ________________________________________________________________________________
             Console.ReadLine();
 
         }
-        public static void InsertById()
+        public static void InsertCategory()
         {
 
-        }
-        public static void UpdateById()
-        {
+            Console.WriteLine("El id se agrega automaticamente.");
+            Console.WriteLine("Ingrese nombre de la categoria :(No mayor a 15 caracteres)");
+            string nombreCategoria = Console.ReadLine();
+            Console.WriteLine("Ingrese descripcion de la categoria :");
+            string descripcionCategoria = Console.ReadLine();
+            CategoriesLogic categories = new CategoriesLogic();
+            try
+            {
+                categories.Add(new Categories
+                {
+                    CategoryName = nombreCategoria,
+                    Description = descripcionCategoria
 
+                });
+                Console.WriteLine("Se agrego la nueva categoria exitosamente!");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Se excedio con el numero de caracteres.");
+            }
+            Console.ReadLine();
         }
+        public static void UpdateCategoryDescriptionById()
+        {
+            int opcion = RequestId();
+            Console.WriteLine("Ingrese descripcion de la categoria :");
+            string descripcionCategoria = Console.ReadLine();
+            CategoriesLogic categories = new CategoriesLogic();
+            Categories categorie = categories.GetById(opcion);
+
+            if (categorie != null)
+            {
+                categories.Update(new Categories
+                {
+                    CategoryID = opcion,
+                    Description = descripcionCategoria
+                });
+                Console.WriteLine("Se updateo la categoria exitosamente!");
+            }
+            else
+            {
+                Console.WriteLine("No agrego un id Existente");
+            }
+            Console.ReadLine();
+        }
+        public static void ThrowOwnException(string mensaje)
+        {
+            throw new OwnExceptionForced(mensaje);
+        }
+
     }
 }
