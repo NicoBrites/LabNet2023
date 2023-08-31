@@ -192,7 +192,7 @@ ________________________________________________________________________________
             }
             catch (Exception)
             {
-                Console.WriteLine("Se excedio con el numero de caracteres.");
+                Console.WriteLine("Se excedio con el numero de caracteres o no ingreso nada en el nombre.");
             }
             Console.ReadLine();
         }
