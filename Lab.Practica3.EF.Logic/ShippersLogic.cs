@@ -20,5 +20,29 @@ namespace Lab.Practica3.EF.Logic
         {
             return (Shippers)context.Shippers.Find(id);
         }
+
+        public void Delete(int id)
+        {
+            var shipperAEliminar = context.Shippers.Find(id);
+
+            context.Shippers.Remove(shipperAEliminar);
+
+            context.SaveChanges();
+
+        }
+        public void Add(Shippers shipper)
+        {
+            context.Shippers.Add(shipper);
+            context.SaveChanges();
+        }
+
+        public void Update(Shippers shipper)
+        {
+            var shipperUpdate = context.Shippers.Find(shipper.ShipperID);
+
+            shipperUpdate.Phone = shipper.Phone;
+
+            context.SaveChanges();
+        }
     }
 }

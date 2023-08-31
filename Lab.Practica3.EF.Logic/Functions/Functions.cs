@@ -25,9 +25,9 @@ namespace Lab.Practica3.EF.Functions
             string menu = @"
 Menu Principal :
 1) Recorrer la lista de categorias e imprimir por consola el id y nombre de cada categoria
-2) Recorrer la lista de categorias e imprimir por consola el id y nombre de cada shipper
-3) Ingresar un id de un shipper e imprimir por consola el nombre
-4) Ingresar un id de una category e imprimir por consola el nombre
+2) Recorrer la lista de shippers e imprimir por consola el id y nombre de cada shipper
+3) Ingresar un id de una category e imprimir por consola el nombre
+4) Borra un elemento de la tabla shipper ingresando su id
 0) Cerrar la aplicacion
 _______________________________________________________________________________________
             ";
@@ -65,11 +65,11 @@ ________________________________________________________________________________
                 }
                 else if (opcion == 3)
                 {
-                    ReturnShipperNameById();
+                    ReturnCategoriNameById();
                 }
                 else if (opcion == 4)
                 {
-                    ReturnCategoriNameById();
+                    DeleteShipperById();
                 }
                 else if (opcion == 0)
                 {
@@ -106,25 +106,6 @@ ________________________________________________________________________________
             Console.ReadLine();
         }
 
-        public static void ReturnShipperNameById()
-        {
-            int opcion = RequestId();
-
-            ShippersLogic shippers = new ShippersLogic();
-
-            bool opcionFlag = true;
-
-            foreach (Shippers shipper in shippers.GetAll())
-            {
-                if (shipper.ShipperID == opcion)
-                {
-                    Console.WriteLine($"{shipper.ShipperID} - {shipper.CompanyName}");
-                    opcionFlag = false;
-                }             
-            }
-            if ( opcionFlag ) { Console.WriteLine("No ingreso un id existente."); }
-            Console.ReadLine();
-        }
         public static void ReturnCategoriNameById()
         {
 
@@ -158,6 +139,35 @@ ________________________________________________________________________________
                     Console.WriteLine("No ingreso un numero");
                 }
             }
+        }
+
+        public static void DeleteShipperById()
+        {
+
+            int opcion = RequestId();
+
+            ShippersLogic shippers = new ShippersLogic();
+            Shippers shipper = shippers.GetById(opcion);
+
+            if ( shipper != null )
+            {
+                shippers.Delete(opcion);
+                Console.WriteLine("Se elimino el shipper con id : {0}",opcion);
+            }
+            else
+            {
+                Console.WriteLine("No ingreso un ID existente.");
+            }
+            Console.ReadLine();
+
+        }
+        public static void InsertById()
+        {
+
+        }
+        public static void UpdateById()
+        {
+
         }
     }
 }

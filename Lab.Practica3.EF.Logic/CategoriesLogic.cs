@@ -23,6 +23,35 @@ namespace Lab.Practica3.EF.Logic
             return (Categories)context.Categories.Find(id);
         }
 
+        public void Delete(int id)
+        {
+            var categoryAEliminar = context.Categories.Find(id);
+
+            context.Categories.Remove(categoryAEliminar);
+
+            context.SaveChanges();
+
+        }
+        public void Add(Categories category)
+        {
+            context.Categories.Add(category);
+            context.SaveChanges();
+        }
+
+        public void Update(Categories category)
+        {
+            var categoryUpdate = context.Categories.Find(category.CategoryID);
+
+            categoryUpdate.Description = category.Description;
+
+            context.SaveChanges();
+        }
+        /*
+        public static string ForcedMock(string mensaje)
+        {
+            return mensaje;
+        }*/
+
 
     }
 }
