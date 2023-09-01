@@ -25,8 +25,8 @@ namespace Lab.Practica3.EF.Functions
             Console.Clear();
             string menu = @"
 Menu Principal :
-1) Recorrer la lista de categorias e imprimir por consola el id y nombre de cada categoria
-2) Recorrer la lista de shippers e imprimir por consola el id y nombre de cada shipper
+1) Recorrer la lista de categorias e imprimir por consola todos sus datos
+2) Recorrer la lista de shippers e imprimir por consola todos sus datos (menos las fotos)
 3) Ingresar un id de una category e imprimir por consola el nombre
 4) Borra un elemento de la tabla shipper ingresando su id
 5) Inserta nueva categoria
@@ -64,10 +64,10 @@ ________________________________________________________________________________
                 switch (opcion)
                 {
                     case 1:
-                        ListIdAndNameOfEntity("categories");
+                        ListEntity("categories");
                         break;
                     case 2:
-                        ListIdAndNameOfEntity("shipper");
+                        ListEntity("shipper");
                         break;
                     case 3:
                         ReturnCategoriNameById();
@@ -100,7 +100,7 @@ ________________________________________________________________________________
                 if (flagApagar) {break;}
             }
         }
-        public static void ListIdAndNameOfEntity(string tipo)
+        public static void ListEntity(string tipo)
         {
             if (tipo == "categories")
             {
@@ -109,6 +109,8 @@ ________________________________________________________________________________
                 foreach (Categories categorie in categories.GetAll())
                 {
                     Console.WriteLine($"{categorie.CategoryID} - {categorie.CategoryName}");
+                    Console.WriteLine($"{categorie.Description}");
+                    Console.WriteLine("---------------------------------------------------");
                 }
             }
             else if (tipo == "shipper")
@@ -117,7 +119,7 @@ ________________________________________________________________________________
                 Console.WriteLine("Los shippers son : ");
                 foreach (Shippers shipper in shippers.GetAll())
                 {
-                    Console.WriteLine($"{shipper.ShipperID} - {shipper.CompanyName}");
+                    Console.WriteLine($"{shipper.ShipperID} - {shipper.CompanyName} - {shipper.Phone}");
                 }
             }
             Console.ReadLine();
@@ -175,7 +177,6 @@ ________________________________________________________________________________
                 Console.WriteLine("No ingreso un ID existente.");
             }
             Console.ReadLine();
-
         }
         public static void InsertCategory()
         {
@@ -192,8 +193,8 @@ ________________________________________________________________________________
             {
                 categories.Add(new Categories
                 {
-                    CategoryName = nombreCategoria,
-                    Description = descripcionCategoria
+                    CategoryName = nombreCategoria.Trim(),
+                    Description = descripcionCategoria.Trim()
 
                 });
                 Console.WriteLine("Se agrego la nueva categoria exitosamente!");
@@ -219,7 +220,7 @@ ________________________________________________________________________________
                 categories.Update(new Categories
                 {
                     CategoryID = opcion,
-                    Description = descripcionCategoria
+                    Description = descripcionCategoria.Trim()
                 });
                 Console.WriteLine("Se updateo la categoria exitosamente!");
             }
@@ -258,7 +259,7 @@ ________________________________________________________________________________
             }
             else
             {
-                Console.WriteLine("No agrego un id Existente o no ingreso un numero correcto de Telefono");
+                Console.WriteLine("No agrego un id Existente");
             }
             Console.ReadLine();
         }
@@ -272,20 +273,27 @@ ________________________________________________________________________________
             string telefonoShipper = Console.ReadLine();
 
             ShippersLogic shippers = new ShippersLogic();
-            try
+            if (nombreCompania.Trim() != "" && nombreCompania.Trim().Length < 40)
             {
-                int validacionForzada = int.Parse(telefonoShipper);
-                shippers.Add(new Shippers
+                try
                 {
-                    CompanyName = nombreCompania,
-                    Phone = telefonoShipper
-
-                });
-                Console.WriteLine("Se agrego el nuevo shipper exitosamente!");
+                    int validacionForzada = int.Parse(telefonoShipper);
+                    shippers.Add(new Shippers
+                    {
+                        CompanyName = nombreCompania.Trim(),
+                        Phone = telefonoShipper
+                    });
+                    Console.WriteLine("Se agrego el nuevo shipper exitosamente!");
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Error al ingresar los datos. Intente de nuevo.");
+                }
+                
             }
-            catch (Exception)
+            else 
             {
-                Console.WriteLine("Error al ingresar los datos. Intente de nuevo.");
+                Console.WriteLine("Dejo el nombre vacio, o excedio la cantidad de caracteres");
             }
             Console.ReadLine();
         }
