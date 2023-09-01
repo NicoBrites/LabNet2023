@@ -54,44 +54,44 @@ ________________________________________________________________________________
         public static void StartProgram()
         {
 
-            while (true)
+            while (true) 
             {
                 int opcion = PrincipalMenu();
+                bool flagApagar = false;
 
-                if (opcion == 1)
+                switch (opcion)
                 {
-                    ListIdAndNameOfEntity("categories");
+                    case 1:
+                        ListIdAndNameOfEntity("categories");
+                        break;
+                    case 2:
+                        ListIdAndNameOfEntity("shipper");
+                        break;
+                    case 3:
+                        ReturnCategoriNameById();
+                        break;
+                    case 4:
+                        DeleteShipperById();
+                        break;
+                    case 5:
+                        InsertCategory();
+                        break;
+                    case 6:
+                        UpdateCategoryDescriptionById();
+                        break;
+                    case 0:
+                        Console.WriteLine("Gracias por usar mi aplicacion. Presione Enter para cerrar.");
+                        Console.ReadLine();
+                        flagApagar = true;
+                        break;
+                    default:
+                        Console.WriteLine("Opción inválida. Intente de nuevo.");
+                        break;
                 }
-                else if (opcion == 2)
+                if (flagApagar)
                 {
-                    ListIdAndNameOfEntity("shipper");
-                }
-                else if (opcion == 3)
-                {
-                    ReturnCategoriNameById();
-                }
-                else if (opcion == 4)
-                {
-                    DeleteShipperById();
-                }
-                else if (opcion == 5)
-                {
-                    InsertCategory();
-                }
-                else if (opcion == 6)
-                {
-                    UpdateCategoryDescriptionById();
-                }
-                else if (opcion == 0)
-                {
-                    Console.WriteLine("Gracias por usar mi aplicacion. Presione Enter para cerrar.");
-                    Console.ReadLine();
                     break;
                 }
-                else
-                {
-                    Console.WriteLine("Opción inválida. Intente de nuevo.");
-                }    
             }
         }
         public static void ListIdAndNameOfEntity(string tipo)
