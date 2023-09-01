@@ -239,18 +239,26 @@ ________________________________________________________________________________
             ShippersLogic shippers = new ShippersLogic();
             Shippers shipper = shippers.GetById(opcion);
 
-            if (shipper != null)
+            if (shipper != null )
             {
-                shippers.Update(new Shippers
+                try
                 {
-                    ShipperID = opcion,
-                    Phone = telefonoShipper
-                });
-                Console.WriteLine("Se updateo el shipper exitosamente!");
+                    int validacionForzada = int.Parse(telefonoShipper);
+                    shippers.Update(new Shippers
+                    {
+                        ShipperID = opcion,
+                        Phone = telefonoShipper
+                    });
+                    Console.WriteLine("Se updateo el shipper exitosamente!");
+                }
+                catch
+                {
+                    Console.WriteLine("Ingreso un numero incorrecto");
+                }
             }
             else
             {
-                Console.WriteLine("No agrego un id Existente");
+                Console.WriteLine("No agrego un id Existente o no ingreso un numero correcto de Telefono");
             }
             Console.ReadLine();
         }
@@ -266,6 +274,7 @@ ________________________________________________________________________________
             ShippersLogic shippers = new ShippersLogic();
             try
             {
+                int validacionForzada = int.Parse(telefonoShipper);
                 shippers.Add(new Shippers
                 {
                     CompanyName = nombreCompania,
@@ -276,7 +285,7 @@ ________________________________________________________________________________
             }
             catch (Exception)
             {
-                Console.WriteLine("Se excedio con el numero de caracteres o no ingreso nada en el nombre.");
+                Console.WriteLine("Error al ingresar los datos. Intente de nuevo.");
             }
             Console.ReadLine();
         }
