@@ -86,6 +86,7 @@ ________________________________________________________________________________
                         break;
                     default:
                         Console.WriteLine("Opción inválida. Intente de nuevo.");
+                        Console.ReadLine();
                         break;
                 }
                 if (flagApagar) {break;}
@@ -123,7 +124,7 @@ ________________________________________________________________________________
 
             if (categorie != null) 
             {
-                Console.WriteLine(categorie.CategoryName);
+                Console.WriteLine($"El nombre de la categoria con id {opcion} es : {categorie.CategoryName}");
             }
             else
             { 
