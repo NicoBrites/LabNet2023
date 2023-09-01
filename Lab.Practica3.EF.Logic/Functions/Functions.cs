@@ -30,7 +30,9 @@ Menu Principal :
 3) Ingresar un id de una category e imprimir por consola el nombre
 4) Borra un elemento de la tabla shipper ingresando su id
 5) Inserta nueva categoria
-6) Actualiza la descripcion de una categoria por id
+6) Inserta nuevo shipper
+7) Actualiza la descripcion de una categoria por id
+8) Actualiza el telefono de un shipper por id
 0) Cerrar la aplicacion
 _______________________________________________________________________________________
             ";
@@ -77,7 +79,13 @@ ________________________________________________________________________________
                         InsertCategory();
                         break;
                     case 6:
+                        InsertShipper();
+                        break;
+                    case 7:
                         UpdateCategoryDescriptionById();
+                        break;
+                    case 8:
+                        UpdateShypperPhoneById();
                         break;
                     case 0:
                         Console.WriteLine("Gracias por usar mi aplicacion. Presione Enter para cerrar.");
@@ -221,7 +229,59 @@ ________________________________________________________________________________
             }
             Console.ReadLine();
         }
-        public static void ThrowOwnException(string mensaje)
+        public static void UpdateShypperPhoneById()
+        {
+            int opcion = RequestId();
+
+            Console.WriteLine("Ingrese el telefono del shypper :");
+            string telefonoShipper = Console.ReadLine();
+
+            ShippersLogic shippers = new ShippersLogic();
+            Shippers shipper = shippers.GetById(opcion);
+
+            if (shipper != null)
+            {
+                shippers.Update(new Shippers
+                {
+                    ShipperID = opcion,
+                    Phone = telefonoShipper
+                });
+                Console.WriteLine("Se updateo el shipper exitosamente!");
+            }
+            else
+            {
+                Console.WriteLine("No agrego un id Existente");
+            }
+            Console.ReadLine();
+        }
+        public static void InsertShipper()
+        {
+            Console.WriteLine("El id se agrega automaticamente.");
+            Console.WriteLine("Ingrese nombre de la compania:(No mayor a 40 caracteres)");
+            string nombreCompania = Console.ReadLine();
+
+            Console.WriteLine("Ingrese el telefono del shipper :");
+            string telefonoShipper = Console.ReadLine();
+
+            ShippersLogic shippers = new ShippersLogic();
+            try
+            {
+                shippers.Add(new Shippers
+                {
+                    CompanyName = nombreCompania,
+                    Phone = telefonoShipper
+
+                });
+                Console.WriteLine("Se agrego el nuevo shipper exitosamente!");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Se excedio con el numero de caracteres o no ingreso nada en el nombre.");
+            }
+            Console.ReadLine();
+        }
+
+            public static void ThrowOwnException(string mensaje)
         {
             throw new OwnExceptionForced(mensaje);
         }
