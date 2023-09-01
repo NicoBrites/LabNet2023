@@ -88,10 +88,7 @@ ________________________________________________________________________________
                         Console.WriteLine("Opción inválida. Intente de nuevo.");
                         break;
                 }
-                if (flagApagar)
-                {
-                    break;
-                }
+                if (flagApagar) {break;}
             }
         }
         public static void ListIdAndNameOfEntity(string tipo)
