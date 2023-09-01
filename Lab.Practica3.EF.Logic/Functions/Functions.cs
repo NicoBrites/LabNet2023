@@ -290,7 +290,7 @@ ________________________________________________________________________________
             Console.ReadLine();
         }
 
-            public static void ThrowOwnException(string mensaje)
+        public static void ThrowOwnException(string mensaje)
         {
             throw new OwnExceptionForced(mensaje);
         }
