@@ -254,7 +254,7 @@ ________________________________________________________________________________
                 }
                 catch
                 {
-                    Console.WriteLine("Error! Ingreso un numero incorrecto");
+                    Console.WriteLine("Error! No ingreso un numero de telefono valido");
                 }
             }
             else
@@ -293,7 +293,7 @@ ________________________________________________________________________________
             }
             else 
             {
-                Console.WriteLine("Error! Dejo el nombre vacio, o excedio la cantidad de caracteres");
+                Console.WriteLine("Error! Se excedio con el numero de caracteres o no ingreso nada en el nombre.");
             }
             Console.ReadLine();
         }
