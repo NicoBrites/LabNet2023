@@ -138,7 +138,7 @@ ________________________________________________________________________________
             }
             else
             { 
-                Console.WriteLine("No ingreso un ID existente."); 
+                Console.WriteLine("Error! No ingreso un ID existente."); 
             }
             Console.ReadLine();
         }
@@ -154,7 +154,7 @@ ________________________________________________________________________________
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("No ingreso un numero");
+                    Console.WriteLine("Error! No ingreso un numero");
                 }
             }
         }
@@ -174,7 +174,7 @@ ________________________________________________________________________________
             }
             else
             {
-                Console.WriteLine("No ingreso un ID existente.");
+                Console.WriteLine("Error! No ingreso un ID existente.");
             }
             Console.ReadLine();
         }
@@ -201,7 +201,7 @@ ________________________________________________________________________________
             }
             catch (Exception)
             {
-                Console.WriteLine("Se excedio con el numero de caracteres o no ingreso nada en el nombre.");
+                Console.WriteLine("Error! Se excedio con el numero de caracteres o no ingreso nada en el nombre.");
             }
             Console.ReadLine();
         }
@@ -226,7 +226,7 @@ ________________________________________________________________________________
             }
             else
             {
-                Console.WriteLine("No agrego un id Existente");
+                Console.WriteLine("Error! No agrego un id Existente");
             }
             Console.ReadLine();
         }
@@ -254,12 +254,12 @@ ________________________________________________________________________________
                 }
                 catch
                 {
-                    Console.WriteLine("Ingreso un numero incorrecto");
+                    Console.WriteLine("Error! Ingreso un numero incorrecto");
                 }
             }
             else
             {
-                Console.WriteLine("No agrego un id Existente");
+                Console.WriteLine("Error! No agrego un id Existente");
             }
             Console.ReadLine();
         }
@@ -287,13 +287,13 @@ ________________________________________________________________________________
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Error al ingresar los datos. Intente de nuevo.");
+                    Console.WriteLine("Error! No ingreso un numero de telefono valido");
                 }
                 
             }
             else 
             {
-                Console.WriteLine("Dejo el nombre vacio, o excedio la cantidad de caracteres");
+                Console.WriteLine("Error! Dejo el nombre vacio, o excedio la cantidad de caracteres");
             }
             Console.ReadLine();
         }

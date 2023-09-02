@@ -27,6 +27,9 @@ namespace Lab.Practica3.EF.Logic
         {
             var categoryAEliminar = context.Categories.Find(id);
 
+            context.Entry(categoryAEliminar).Reference(c => c.Products).Load();
+            categoryAEliminar.Products = null;
+
             context.Categories.Remove(categoryAEliminar);
 
             context.SaveChanges();
