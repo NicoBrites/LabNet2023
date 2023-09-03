@@ -10,6 +10,8 @@ namespace Lab.Practica4.EF
     {
         static void Main(string[] args)
         {
+            Console.Title = "Practica N° 3";
+            Menu.Functions.
         }
     }
 }
