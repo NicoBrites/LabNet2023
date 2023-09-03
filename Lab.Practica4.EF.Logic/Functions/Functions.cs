@@ -9,19 +9,19 @@ namespace Lab.Practica4.EF.Logic.Functions
 {
     public class Functions
     {
-        public static void ReturnCustomerObjectById()
+        public static Customers ReturnCustomerObjectById()
         {
             while (true)
             {
-                string opcion = RequestIdString();
-
                 CustomerLogic customers = new CustomerLogic();
-                Customers customer = customers.ReturnObject(opcion);
+                Customers customer = customers.ReturnObject();
 
                 if (customer != null)
                 {
                     Console.WriteLine("El customer con ese id es:");
                     Console.WriteLine($"ID: {customer.CustomerID} - {customer.CompanyName}");
+                    Console.ReadLine();
+                    return customer;
                 }
                 else
                 {
@@ -182,6 +182,58 @@ namespace Lab.Practica4.EF.Logic.Functions
             foreach (var product in productList)
             {
                 Console.WriteLine($"Stock: {product.UnitsInStock} - {product.ProductName} - Id: {product.ProductID}");
+            }
+            Console.ReadLine();
+        }
+        public static void ReturnFirstProductNotNullAndIdEquals789()
+        {
+            ProductLogic products = new ProductLogic();
+            Products product = products.ReturnFirstProductNotNullAndIdEquals789();
+
+            if (product != null)
+            {
+                Console.WriteLine("El primer elemento no nulo con id 789 es:");
+                Console.WriteLine($"ID: {product.ProductID} - {product.ProductName}");
+            }
+            else
+            {
+                Console.WriteLine("No hay ningun producto no nulo con ese id");
+            }
+            Console.ReadLine();
+        }
+
+        public static void ReturnDistinctProductCategories()
+        {
+            ProductLogic products = new ProductLogic();
+            List<string> productList = products.ReturnDistinctProductCategories();
+
+            Console.WriteLine("La lista de productos asociadas a su categoria es:");
+            foreach (var product in productList)
+            {
+                Console.WriteLine(product);
+            }
+            Console.ReadLine();
+        }
+
+        public static void FirstProductOfList()
+        {
+            ProductLogic products = new ProductLogic();
+            Products product = products.FirstProductOfList();
+
+            Console.WriteLine("El primer elemento de la lista es:");
+            Console.WriteLine($"ID: {product.ProductID} - {product.ProductName}");
+            Console.ReadLine();
+        }
+
+        public static void ReturnCustomersWithOrders()
+        {
+            CustomerLogic customers = new CustomerLogic();
+            IEnumerable<dynamic> customersList = customers.ReturnCustomersWithOrders();
+
+            Console.WriteLine("devolver los customer con la cantidad de ordenes asociadas:");
+            foreach (var customer in customersList)
+            {
+                Console.WriteLine(customer);
             }
             Console.ReadLine();
         }

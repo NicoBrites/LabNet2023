@@ -13,10 +13,9 @@ namespace Lab.Practica4.EF.Logic
         {
         }
 
-        public Customers ReturnObject(string id)
+        public Customers ReturnObject()
         {
             var query = from c in context.Customers
-                        where c.CustomerID == id
                         select c;
 
             return query.First();
@@ -52,6 +51,23 @@ namespace Lab.Practica4.EF.Logic
             return context.Customers.Where(c => c.Region == "WA").Take(3).ToList();
         }
 
-
+        
+        public IEnumerable<dynamic> ReturnCustomersWithOrders()
+        {
+            var query = from customers in context.Customers
+                        join orders in context.Orders
+                        on customers.CustomerID
+                            equals orders.CustomerID
+                        into count
+                        select new
+                        {
+                            ID = customers.CustomerID,
+                            ContactName = customers.ContactName,
+                            OrdersCuantity = count.Count()
+                        };
+            return query.ToList();
+        }
+   
+        
     }
 }

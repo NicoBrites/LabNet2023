@@ -39,10 +39,26 @@ namespace Lab.Practica4.EF.Logic
         }
         public Products ReturnFirstProductNotNullAndIdEquals789()
         {
-            //Method Sintax
+
             return context.Products.FirstOrDefault(p => p.ProductID == 789);
         }
+        public List<string> ReturnDistinctProductCategories() /// ta mal
+        {
 
+            var query = from p in context.Products
+                        join c in context.Categories
+                            on p.CategoryID
+                            equals c.CategoryID
+                        group p by new { p.CategoryID, c.CategoryName }
+                        into productsCategories
+                        select productsCategories.Key.CategoryName;
+            return query.ToList();
+        }
+
+        public Products FirstProductOfList()
+        { 
+            return context.Products.Take(1).First();
+        }
 
     }
 }
