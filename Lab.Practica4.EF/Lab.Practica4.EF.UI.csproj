@@ -50,12 +50,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Menu\Menu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lab.Practica4.EF.Data\Lab.Practica4.EF.Data.csproj">
+      <Project>{a8b09bd8-46b6-48de-90a6-d10ff0c5b784}</Project>
+      <Name>Lab.Practica4.EF.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lab.Practica4.EF.Entities\Lab.Practica4.EF.Entities.csproj">
+      <Project>{36d204d8-fbc0-45d7-89ac-1a1951d5ff00}</Project>
+      <Name>Lab.Practica4.EF.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lab.Practica4.EF.Logic\Lab.Practica4.EF.Logic.csproj">
+      <Project>{12b10842-6519-411c-91d1-8d60e902f22d}</Project>
+      <Name>Lab.Practica4.EF.Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
