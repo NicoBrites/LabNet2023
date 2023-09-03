@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab.Practica4.EF
+namespace Lab.Practica4.EF.UI
 {
     internal class Program
     {
