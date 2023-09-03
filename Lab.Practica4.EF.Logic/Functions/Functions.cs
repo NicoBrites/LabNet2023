@@ -13,19 +13,22 @@ namespace Lab.Practica4.EF.Logic.Functions
         {
             while (true)
             {
-                //string opcion = RequestIdString();
+                string opcion = RequestIdString();
 
                 CustomerLogic customers = new CustomerLogic();
-                List<Customers> customer = customers.ReturnObject();
+                Customers customer = customers.ReturnObject(opcion);
 
-                Console.WriteLine("La lista de customers es:");
-                foreach (Customers customerItem in customer)
+                if (customer != null)
                 {
-                    Console.WriteLine(customerItem);
-
+                    Console.WriteLine("El customer con ese id es:");
+                    Console.WriteLine($"ID: {customer.CustomerID} - {customer.CompanyName}");
                 }
-
+                else
+                {
+                    Console.WriteLine("Error! No ingreso un ID existente.");
+                }
                 Console.ReadLine();
+
             }
 
         }
@@ -49,7 +52,7 @@ namespace Lab.Practica4.EF.Logic.Functions
         {
             while (true)
             {
-                Console.WriteLine("Ingrese el id: ");
+                Console.WriteLine("Ingrese el id: (max 5 caracteres)");
                 string opcion = Console.ReadLine();
                 if (opcion.Trim() != null && opcion.Length <= 5)
                 {
@@ -57,7 +60,7 @@ namespace Lab.Practica4.EF.Logic.Functions
                 }
                 else
                 {
-                    Console.WriteLine("Error! No ingreso un numero");
+                    Console.WriteLine("Error! No ingreso nada o ingreso mas de 5 caracteres");
                 }
             }
         }

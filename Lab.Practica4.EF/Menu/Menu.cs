@@ -25,9 +25,9 @@ Menu Principal :
 3) Devolver todos los productos en stock y con valor mayor a 3 por unidad.
 4) Devolver todos los customer de la region WA.
 5) Devolver los nombres de los customers en mayuscula y minuscula.
-6) Inserta nuevo shipper
-7) Actualiza la descripcion de una categoria por id
-8) Actualiza el telefono de un shipper por id
+6) Devolver los customers de WA y la fecha de orden mayor a 1/1/97
+7) Devolver los primeros 3 Customers de la Región WA
+8) Devolver lista de productos ordenados por nombre
 9) Devolver los productos ordenados de manera descendente por unidades en stock
 0) Cerrar la aplicacion
 _______________________________________________________________________________________

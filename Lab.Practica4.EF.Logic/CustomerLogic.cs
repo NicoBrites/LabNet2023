@@ -13,10 +13,13 @@ namespace Lab.Practica4.EF.Logic
         {
         }
 
-        public List<Customers> ReturnObject()
+        public Customers ReturnObject(string id)
         {
+            var query = from c in context.Customers
+                        where c.CustomerID == id
+                        select c;
 
-            return context.Customers.ToList();
+            return query.First();
         }
 
         public List<Customers> ReturnCustomersFromWA()
@@ -38,7 +41,7 @@ namespace Lab.Practica4.EF.Logic
             var query = from c in context.Customers
                         join o in context.Orders
                         on c.CustomerID equals o.CustomerID
-                        where c.Region == "WA" && o.OrderDate > DateTime.Parse("1/1/1997")
+                        where c.Region == "WA" && o.OrderDate > new DateTime(1997, 1, 1)
                         select c;
 
             return query.ToList();
