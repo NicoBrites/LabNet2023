@@ -42,7 +42,7 @@ namespace Lab.Practica4.EF.Logic
 
             return context.Products.FirstOrDefault(p => p.ProductID == 789);
         }
-        public List<string> ReturnDistinctProductCategories() /// ta mal
+        public List<string> ReturnDistinctProductCategories()
         {
 
             var query = from p in context.Products

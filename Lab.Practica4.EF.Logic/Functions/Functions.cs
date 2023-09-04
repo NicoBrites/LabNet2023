@@ -18,7 +18,7 @@ namespace Lab.Practica4.EF.Logic.Functions
 
                 if (customer != null)
                 {
-                    Console.WriteLine("El customer con ese id es:");
+                    Console.WriteLine("El customer es:");
                     Console.WriteLine($"ID: {customer.CustomerID} - {customer.CompanyName}");
                     Console.ReadLine();
                     return customer;
@@ -207,7 +207,7 @@ namespace Lab.Practica4.EF.Logic.Functions
             ProductLogic products = new ProductLogic();
             List<string> productList = products.ReturnDistinctProductCategories();
 
-            Console.WriteLine("La lista de productos asociadas a su categoria es:");
+            Console.WriteLine("Las distintas categorias asociadas a los productos son:");
             foreach (var product in productList)
             {
                 Console.WriteLine(product);

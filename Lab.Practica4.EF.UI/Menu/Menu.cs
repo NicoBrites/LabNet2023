@@ -32,7 +32,7 @@ ________________________________________________________________________________
             Console.Clear();
             string menu = @"
 Menu Customer :
-1) Devolver un Customer por id
+1) Devolver un Customer
 2) Devolver todos los customer de la region WA.
 3) Devolver los nombres de los customers en mayuscula y minuscula.
 4) Devolver los customers de WA y la fecha de orden mayor a 1/1/97
@@ -91,8 +91,6 @@ ________________________________________________________________________________
         }
         public static void StartProgram()
         {
-            bool inicioPrograma = true;
-            string tipoMenu;
             while (true)
             {
 
