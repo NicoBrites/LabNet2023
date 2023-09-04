@@ -59,6 +59,5 @@ namespace Lab.Practica4.EF.Logic
         { 
             return context.Products.Take(1).First();
         }
-
     }
 }

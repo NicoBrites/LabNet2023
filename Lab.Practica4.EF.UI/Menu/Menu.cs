@@ -95,7 +95,6 @@ ________________________________________________________________________________
             {
 
                 int opcion = PrincipalMenu("Principal");
-
                 bool flagApagar = false;
 
                 switch (opcion)

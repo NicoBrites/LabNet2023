@@ -28,7 +28,6 @@ namespace Lab.Practica4.EF.Logic.Functions
                     Console.WriteLine("Error! No ingreso un ID existente.");
                 }
                 Console.ReadLine();
-
             }
 
         }
@@ -237,6 +236,5 @@ namespace Lab.Practica4.EF.Logic.Functions
             }
             Console.ReadLine();
         }
-
     }
 }

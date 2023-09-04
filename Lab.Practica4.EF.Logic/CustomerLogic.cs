@@ -67,7 +67,5 @@ namespace Lab.Practica4.EF.Logic
                         };
             return query.ToList();
         }
-   
-        
     }
 }
