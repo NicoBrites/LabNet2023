@@ -184,10 +184,10 @@ namespace Lab.Practica4.EF.Logic.Functions
             }
             Console.ReadLine();
         }
-        public static void ReturnFirstProductNotNullAndIdEquals789()
+        public static void ReturnFirstProductOrNullAndIdEquals789()
         {
             ProductLogic products = new ProductLogic();
-            Products product = products.ReturnFirstProductNotNullAndIdEquals789();
+            Products product = products.ReturnFirstProductOrNullAndIdEquals789();
 
             if (product != null)
             {
@@ -196,7 +196,7 @@ namespace Lab.Practica4.EF.Logic.Functions
             }
             else
             {
-                Console.WriteLine("No hay ningun producto no nulo con ese id");
+                Console.WriteLine("Es un elemento nulo, si te lo devuelvo explota el programa");
             }
             Console.ReadLine();
         }

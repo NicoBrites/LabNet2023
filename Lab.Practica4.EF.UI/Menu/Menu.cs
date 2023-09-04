@@ -149,7 +149,7 @@ ________________________________________________________________________________
                                     Functions.ReturnAllProductsInStockAnd3Value();
                                     break;
                                 case 3:
-                                    Functions.ReturnFirstProductNotNullAndIdEquals789();
+                                    Functions.ReturnFirstProductOrNullAndIdEquals789();
                                     break;
                                 case 4:
                                     Functions.ReturnProductsOrderByName();

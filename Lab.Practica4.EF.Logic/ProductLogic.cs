@@ -37,7 +37,7 @@ namespace Lab.Practica4.EF.Logic
 
             return query.ToList();
         }
-        public Products ReturnFirstProductNotNullAndIdEquals789()
+        public Products ReturnFirstProductOrNullAndIdEquals789()
         {
 
             return context.Products.FirstOrDefault(p => p.ProductID == 789);
