@@ -1,0 +1,12 @@
+h1 {
+    text-align: center;
+}
+p {
+    text-align: left;
+}
+input[type="text"] {
+    text-align: center;
+}
+#trampa {
+    color: white;
+}
