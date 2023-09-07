@@ -23,7 +23,7 @@ intentarBtn.addEventListener("click", () => {
         if (numeroUsuario === numeroAleatorio) {
             mensaje.textContent = "¡Felicitaciones ganaste!";
             Swal.fire({
-                title: 'GANASTE BRO !',
+                title: 'GANASTE !',
                 width: 600,
                 padding: '3em',
                 color: '#716add',
@@ -37,10 +37,9 @@ intentarBtn.addEventListener("click", () => {
             }
 
         } else {
-            puntaje -= 2;
+            if (puntaje != 0) { puntaje -= 2; }
             if (puntaje <= 0) {
-                mensaje.textContent = '¡Perdiste! El número era ${numeroAleatorio}.';
-                reiniciarJuego();
+                mensaje.textContent = '¡Perdiste! El número era ' + numeroAleatorio;    
             } else {
                 devolverCercania(numeroUsuario, numeroAleatorio);
             }
