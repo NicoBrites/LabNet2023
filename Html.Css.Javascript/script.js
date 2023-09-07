@@ -1,3 +1,4 @@
+
 let numeroAleatorio = Math.floor(Math.random() * 20) + 1;
 let puntaje = 20;
 let puntajeMaximo = 0;
@@ -21,7 +22,15 @@ intentarBtn.addEventListener("click", () => {
         
         if (numeroUsuario === numeroAleatorio) {
             mensaje.textContent = "¡Felicitaciones ganaste!";
-            alert("GANASTE !!!!")
+            Swal.fire({
+                title: 'GANASTE BRO !',
+                width: 600,
+                padding: '3em',
+                color: '#716add',
+                background: '#fff url(/images/trees.png)',
+                backdrop: `
+                  rgba(124, 254, 0,0.4)
+                `})
 
             if (puntaje > puntajeMaximo) {
                 puntajeMaximo = puntaje;
