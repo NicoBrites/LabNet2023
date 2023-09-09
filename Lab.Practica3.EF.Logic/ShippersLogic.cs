@@ -39,10 +39,18 @@ namespace Lab.Practica3.EF.Logic
         public void Update(Shippers shipper)
         {
             var shipperUpdate = context.Shippers.Find(shipper.ShipperID);
+            if (shipperUpdate != null)
+            {
+                shipperUpdate.CompanyName = shipper.CompanyName;
+                shipperUpdate.Phone = shipper.Phone;
 
-            shipperUpdate.Phone = shipper.Phone;
-
-            context.SaveChanges();
+                context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Ingreso un id inexistente");
+            }
+           
         }
     }
 }

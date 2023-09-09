@@ -1,0 +1,14 @@
+﻿@model Lab.Practica3.EF.Entities.Dto.ShippersDto
+@{
+    ViewBag.Title = "Shippers PAGE";
+}
+
+<h1>HOLA SOY LA PAGE</h1>
+
+@using (Html.BeginForm("InsertShipper", "Shippers", FormMethod.Post))
+{
+    <label>CompanyName: </label> @Html.TextBoxFor(s => s.CompanyName)
+    <label>Phone: </label> @Html.TextBoxFor(s => s.Phone)
+    <input type="submit" value="Guardar" />
+}
+

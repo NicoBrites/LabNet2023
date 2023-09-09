@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab.Practica3.EF.Logic", ".
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab.Practica3.EF.LogicTests", "..\Lab.Practica3.EF.LogicTests\Lab.Practica3.EF.LogicTests.csproj", "{D542F32B-FCC3-42C7-BA87-C9EFA2143B76}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab.practica6.MVC", "..\Lab.practica6.MVC\Lab.practica6.MVC.csproj", "{DD59C1A5-E3EB-47FD-BD96-20DA0935830E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{D542F32B-FCC3-42C7-BA87-C9EFA2143B76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D542F32B-FCC3-42C7-BA87-C9EFA2143B76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D542F32B-FCC3-42C7-BA87-C9EFA2143B76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD59C1A5-E3EB-47FD-BD96-20DA0935830E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD59C1A5-E3EB-47FD-BD96-20DA0935830E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD59C1A5-E3EB-47FD-BD96-20DA0935830E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD59C1A5-E3EB-47FD-BD96-20DA0935830E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

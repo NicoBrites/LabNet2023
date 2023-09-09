@@ -54,6 +54,7 @@
     <Compile Include="Categories.cs" />
     <Compile Include="CustomerDemographics.cs" />
     <Compile Include="Customers.cs" />
+    <Compile Include="Dto\ShippersDto.cs" />
     <Compile Include="Employees.cs" />
     <Compile Include="Orders.cs" />
     <Compile Include="Order_Details.cs" />
@@ -68,6 +69,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

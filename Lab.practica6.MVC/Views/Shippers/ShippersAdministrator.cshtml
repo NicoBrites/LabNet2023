@@ -1,0 +1,141 @@
+﻿﻿@model Lab.Practica3.EF.Entities.Dto.ShippersDto
+@{
+    ViewBag.Title = "Administrar Shippers";
+}
+<html>
+<body>
+<div class="container">
+    <h2>Administrar Shippers</h2>
+
+    <hr style="color: #0056b2;" />
+    <br>
+    <h5>Agregue un nuevo Shipper:</h5>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">CompanyName:</span>
+        <input type="text" class="form-control" id="companyName" placeholder="" aria-describedby="basic-addon1">
+    
+    </div>
+    
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon2">Phone:</span>
+        <input type="text" class="form-control" id="phone" placeholder="" aria-describedby="basic-addon2">
+    </div>
+    <button id="crear" type="button" class="btn btn-info">Crear</button>
+    <br>
+    <div class="mb-3">
+        <h5>Modifique un Shipper ingresando su ID:</h5>
+        <div class="input-group">
+            <span class="input-group-text" id="basic-addon3">ShipperID:</span>
+            <input type="text" class="form-control" id="shipperId" placeholder="" aria-describedby="basic-addon3 basic-addon4">
+        </div>
+        <div class="form-text" id="basic-addon4">Solo agreguelo si desea modificar un Shipper existente</div>
+    </div>
+    <button id="update" type="button" class="btn btn-info">Modificar</button>
+
+    
+
+
+
+
+
+
+    @using (Html.BeginForm("Administrator", "Shippers", FormMethod.Post))
+    {
+        <h5>Agregue un nuevo Shipper:</h5>
+
+        <label>CompanyName: </label>
+        @Html.TextBoxFor(s => s.CompanyName)
+        <label>Phone: </label>
+        @Html.TextBoxFor(s => s.Phone)
+        <br><br>
+        <input type="submit" value="Agregar" />
+        <br><br>
+        <h5>Modifique un Shipper ingresando su ID:</h5>
+        <label>ID: </label>
+        @Html.TextBoxFor(s => s.ShipperID)
+        <br><br>
+        <input type="submit" value="Modificar" />
+    }
+
+
+</div>
+</body>
+</html>
+@section Scripts{
+    <script type="text/javascript" charset="utf-8">
+        const crearBoton = document.getElementById("crear");
+        const updatearBoton = document.getElementById("update");
+        const phone = document.getElementById("phone");
+        const companyName = document.getElementById("companyName");
+        const shipperIdStr = document.getElementById("shipperId");
+
+        const idParseado = parseInt(shipperIdStr.value);
+
+        crearBoton.addEventListener("click", () => {
+            if (validarCadena(companyName.value) && validarCadena(phone.value))
+            {
+                console.log("ENTRA PERO NO HACE NADA EL ***");
+                $.ajax({
+                    url: '@Url.Action("Administrator", "Shippers")',
+                    type: 'POST',
+                    data: {
+                        companyName: companyName.value,
+                        phone: phone.value
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        Swal.fire({
+                            title: 'Bien!',
+                            text: 'Shipper creado!',
+                            icon: 'success'
+                        });
+                       
+                    },
+                    error: function () {
+                        console.error("Error")
+                        Swal.fire(
+                            'Error!',
+                            'No se pudo eliminar, por favor volver a intentar!',
+                            'error'
+                        );
+                    }
+
+                });
+            }
+        });
+
+        updatearBoton.addEventListener("click", () => {
+            if (validarCadena(companyName.value) && validarCadena(phone.value)) {
+                if (isNaN(numeroUsuario) || numeroUsuario < 1 || numeroUsuario > 20) {
+                    Swal.fire(
+                        'Error!',
+                        'No se pudo updatear, ingreso mal el ID, por favor volver a intentar!',
+                        'error'
+                    );
+                } else {
+
+
+                }
+
+
+            }
+
+
+
+        });
+
+        function validarCadena(cadena) {
+            console.log(cadena)
+            var regex = /^[a-zA-Z0-9\s]+$/;
+            console.log(regex.test(cadena));
+            return regex.test(cadena);
+        }
+
+
+
+
+    </script>
+}
+
+
