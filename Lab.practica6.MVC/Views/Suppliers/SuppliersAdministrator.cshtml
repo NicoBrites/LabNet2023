@@ -1,15 +1,15 @@
-﻿﻿@model Lab.Practica3.EF.Entities.Dto.ShippersDto
+﻿﻿@model Lab.Practica3.EF.Entities.Dto.SuppliersDto
 @{
-    ViewBag.Title = "Administrar Shippers";
+    ViewBag.Title = "Administrar Suppliers";
 }
 <html>
 <body>
     <div class="container">
-        <h2>Administrar Shippers</h2>
+        <h2>Administrar Suppliers</h2>
 
         <hr style="color: #0056b2;" />
         <br>
-        <h5>Agregue un nuevo Shipper:</h5>
+        <h5>Agregue un nuevo Supplier:</h5>
 
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">CompanyName:</span>
@@ -17,43 +17,28 @@
         </div>
 
         <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon2">Phone:</span>
-            <input type="text" class="form-control" id="phone" placeholder="" aria-describedby="basic-addon2">
+            <span class="input-group-text" id="basic-addon2">ContactName:</span>
+            <input type="text" class="form-control" id="contactName" placeholder="" aria-describedby="basic-addon2">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon2">ContactTitle:</span>
+            <input type="text" class="form-control" id="contactTitle" placeholder="" aria-describedby="basic-addon2">
         </div>
         <button id="crear" type="button" class="btn btn-info">Crear</button>
         <br>
         <br>
         <div class="mb-3">
-            <h5>Modifique un Shipper ingresando su ID:</h5>
+            <h5>Modifique un Supplier ingresando su ID:</h5>
             <div class="input-group">
-                <span class="input-group-text" id="basic-addon3">ShipperID:</span>
-                <input type="text" class="form-control" id="shipperId" placeholder="" aria-describedby="basic-addon3 basic-addon4">
+                <span class="input-group-text" id="basic-addon3">SupplierID:</span>
+                <input type="text" class="form-control" id="supplierId" placeholder="" aria-describedby="basic-addon3 basic-addon4">
             </div>
-            <div class="form-text" id="basic-addon4">Solo agreguelo si desea modificar un Shipper existente</div>
+            <div class="form-text" id="basic-addon4">Solo agreguelo si desea modificar un Supplier existente</div>
         </div>
         <button id="update" type="button" class="btn btn-info">Modificar</button>
 
         <br>
         <br>
-        @using (Html.BeginForm("Administrator", "Shippers", FormMethod.Post))
-        {
-            <h5>Agregue un nuevo Shipper:</h5>
-
-            <label>CompanyName: </label>
-            @Html.TextBoxFor(s => s.CompanyName)
-            <label>Phone: </label>
-            @Html.TextBoxFor(s => s.Phone)
-            <br><br>
-            <input type="submit" value="Agregar" />
-            <br><br>
-            <h5>Modifique un Shipper ingresando su ID:</h5>
-            <label>ID: </label>
-            @Html.TextBoxFor(s => s.ShipperID)
-            <br><br>
-            <input type="submit" value="Modificar" />
-        }
-
-
     </div>
 </body>
 </html>
@@ -61,32 +46,34 @@
     <script type="text/javascript" charset="utf-8">
         const crearBoton = document.getElementById("crear");
         const updatearBoton = document.getElementById("update");
-        const phone = document.getElementById("phone");
         const companyName = document.getElementById("companyName");
-        const shipperId = document.getElementById("shipperId");
+        const contactName = document.getElementById("contactName");
+        const contactTitle = document.getElementById("contactTitle");
+        const supplierId = document.getElementById("supplierId");
 
         crearBoton.addEventListener("click", () => {
-            if (validarCadena(companyName.value) && validarCadena(phone.value)) {
+            if (validarCadena(companyName.value) && validarCadena(contactName.value) && validarCadena(contactTitle.value)) {// aca
                 console.log("ENTRA PERO NO HACE NADA EL ***");
                 $.ajax({
-                    url: '@Url.Action("Administrator", "Shippers")',
+                    url: '@Url.Action("Administrator", "Suppliers")',
                     type: 'POST',
                     data: {
                         companyName: companyName.value,
-                        phone: phone.value
+                        contactName: contactName.value,
+                        contactTitle: contactTitle.value
                     },
                     success: function (data) {
                         console.log(data);
                         Swal.fire({
                             title: 'Bien!',
-                            text: 'Shipper creado!',
+                            text: 'Supplier creado!',
                             icon: 'success',
                             confirmButtonText: 'OK',
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 window.location.href = "index";
                             }
-                        });    
+                        });
                     },
                     error: function () {
                         console.error("Error")
@@ -101,7 +88,7 @@
             else {
                 Swal.fire(
                     'Error!',
-                    'Usaste un caracter especial o dejaste vacio, en el name o el phone...',
+                    'Usaste un caracter especial o dejaste vacio un cuadrito de texto',
                     'error'
                 );
             }
@@ -109,9 +96,13 @@
 
         updatearBoton.addEventListener("click", () => {
 
-            if (validarCadena(companyName.value) && validarCadena(phone.value)) {
-                console.log(shipperId.value)
-                if (isNaN(shipperId.value) || shipperId.value < 1) {
+            if (validarCadena(companyName.value) && validarCadena(contactName.value) && validarCadena(contactTitle.value)) {
+                console.log(supplierId.value)
+                console.log(companyName.value)
+                console.log(contactName.value)
+                console.log(contactTitle.value)
+
+                if (isNaN(supplierId.value) || supplierId.value < 1) {
                     Swal.fire(
                         'Error!',
                         'No se pudo updatear, ingreso mal el ID, por favor volver a intentar!',
@@ -119,18 +110,19 @@
                     );
                 } else {
                     $.ajax({
-                        url: '@Url.Action("Administrator", "Shippers")',
+                        url: '@Url.Action("Administrator", "Suppliers")',
                         type: 'POST',
                         data: {
-                            shipperId: shipperId.value,
+                            supplierId: supplierId.value,
                             companyName: companyName.value,
-                            phone: phone.value
+                            contactName: contactName.value,
+                            contactTitle: contactTitle.value
                         },
                         success: function (data) {
                             console.log(data);
                             Swal.fire({
                                 title: 'Bien!',
-                                text: 'Shipper modificado!',
+                                text: 'Supplier modificado!',
                                 icon: 'success',
                                 confirmButtonText: 'OK',
                             }).then((result) => {
@@ -153,7 +145,7 @@
             else {
                 Swal.fire(
                     'Error!',
-                    'Usaste un caracter especial o dejaste vacio, en el name o el phone...',
+                    'Usaste un caracter especial o dejaste vacio un cuadrito de texto',
                     'error'
                 );
             }

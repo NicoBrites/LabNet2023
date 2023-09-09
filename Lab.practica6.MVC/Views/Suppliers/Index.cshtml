@@ -1,31 +1,33 @@
-﻿@model List<Lab.Practica3.EF.Entities.Dto.ShippersDto>
+﻿@model List<Lab.Practica3.EF.Entities.Dto.SuppliersDto>
 @{
-    ViewBag.Title = "Shippers PAGE";
+    ViewBag.Title = "Suppliers PAGE";
 }
 
-<h1>Lista de Shippers</h1>
+<h1>Lista de Suppliers</h1>
 <hr style="color: #0056b2;" />
 
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Id Shipper</th>
+            <th scope="col">Id Supplier</th>
             <th scope="col">CompanyName</th>
-            <th scope="col">Phone</th>
+            <th scope="col">ContactName</th>
+            <th scope="col">ContactTitle</th>
             <th scope="col">Borrar</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var shipper in Model)
+        @foreach (var supplier in Model)
         {
             <tr>
-                <th scope="row">@shipper.ShipperID</th>
-                <td>@shipper.CompanyName</td>
-                <td>@shipper.Phone</td>
+                <th scope="row">@supplier.SupplierID</th>
+                <td>@supplier.CompanyName</td>
+                <td>@supplier.ContactName</td>
+                <td>@supplier.ContactTitle</td>
                 <td>
-                    <button id="borrar" onclick="deleteShipper(@shipper.ShipperID)">Borrar</button>
+                    <button id="borrar" onclick="deleteSupplier(@supplier.SupplierID)">Borrar</button>
 
-                    @Html.ActionLink("Borrar", "DeleteShipper", new { id = shipper.ShipperID }, new { onclick = "return confirm('Estas seguro de borrar ?')" })
+                    @Html.ActionLink("Borrar", "DeleteShipper", new { id = supplier.SupplierID }, new { onclick = "return confirm('Estas seguro de borrar ?')" })
                 </td>
             </tr>
         }
@@ -35,7 +37,7 @@
 @section Scripts{
     <script type="text/javascript" charset="utf-8">
 
-        function deleteShipper(ShipperID) {
+        function deleteSupplier(SupplierID) {
             Swal.fire({
                 title: '¿Está seguro?',
                 text: "No podrás revertir esta operación!",
@@ -47,13 +49,13 @@
                 confirmButtonText: 'Si, Eliminar!',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    confirmDelete(ShipperID);
+                    confirmDelete(SupplierID);
                 }
             });
         }
-        function confirmDelete(ShipperID) {
+        function confirmDelete(SupplierID) {
             $.ajax({
-                url: '@Url.Action("DeleteShipper", "Shippers")/' + ShipperID,
+                url: '@Url.Action("DeleteSupplier", "Suppliers")/' + SupplierID,
                 method: 'POST',
                 dataType: "json",
                 success: function (data) {
@@ -61,7 +63,7 @@
                     {
                         Swal.fire({
                             title: 'Bien!',
-                            text: 'Shipper eliminado!',
+                            text: 'Supplier eliminado!',
                             icon: 'success',
                             confirmButtonText: 'OK',
                         }).then((result) => {

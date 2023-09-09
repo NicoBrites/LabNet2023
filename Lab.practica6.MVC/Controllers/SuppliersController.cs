@@ -3,54 +3,56 @@ using Lab.Practica3.EF.Entities.Dto;
 using Lab.Practica3.EF.Logic;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace Lab.practica6.MVC.Controllers
 {
-    public class ShippersController : Controller
+    public class SuppliersController : Controller
     {
-        ShippersLogic logic = new ShippersLogic();
+        SuppliersLogic logic = new SuppliersLogic();
         // GET: Shippers
         public ActionResult Index()
         {
-            List<Shippers> shippers = logic.GetAll();
-            List<ShippersDto> shippersDto = shippers.Select(s => new ShippersDto
+            List<Suppliers> suppliers = logic.GetAll();
+            List<SuppliersDto> suppliersDto = suppliers.Select(s => new SuppliersDto
             {
-                ShipperID = s.ShipperID,
+                SupplierID = s.SupplierID,
                 CompanyName = s.CompanyName,
-                Phone = s.Phone               
+                ContactName = s.ContactName,
+                ContactTitle = s.ContactTitle
+
             }).ToList();
 
-            return View(shippersDto);
+            return View(suppliersDto);
         }
 
-        public ActionResult ShippersAdministrator()
+        public ActionResult SuppliersAdministrator()
         {
             return View();
         }
 
 
         [HttpPost]
-        public ActionResult Administrator(ShippersDto shippersDto)
+        public ActionResult Administrator(SuppliersDto suppliersDto)
         {
             try
             {
-                Shippers shippersEntity = new Shippers
+                Suppliers supplierEntity = new Suppliers
                 {
-                    ShipperID = shippersDto.ShipperID,
-                    CompanyName = shippersDto.CompanyName,
-                    Phone = shippersDto.Phone
+                    SupplierID = suppliersDto.SupplierID,
+                    CompanyName = suppliersDto.CompanyName,
+                    ContactName = suppliersDto.ContactName,
+                    ContactTitle = suppliersDto.ContactTitle
                 };
-                if (shippersDto.ShipperID == 0)
+                if (suppliersDto.SupplierID == 0)
                 {
-                    logic.Add(shippersEntity);
+                    logic.Add(supplierEntity);
                 }
                 else
                 {
-                    logic.Update(shippersEntity);
+                    logic.Update(supplierEntity);
                 }
 
                 return Json(new { textStatus = "success" });
@@ -61,7 +63,7 @@ namespace Lab.practica6.MVC.Controllers
             }
         }
         [HttpPost]
-        public ActionResult DeleteShipper(int id)
+        public ActionResult DeleteSupplier(int id)
         {
             try
             {
@@ -72,8 +74,7 @@ namespace Lab.practica6.MVC.Controllers
             {
                 return Json(new { textStatus = "error" });
             }
-          
-        }
 
+        }
     }
 }
