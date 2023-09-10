@@ -67,7 +67,6 @@
 
         crearBoton.addEventListener("click", () => {
             if (validarCadena(companyName.value.trim()) && validarCadena(phone.value)) {
-                console.log("ENTRA PERO NO HACE NADA EL ***");
                 $.ajax({
                     url: '@Url.Action("Administrator", "Shippers")',
                     type: 'POST',
@@ -96,7 +95,6 @@
                                 'error'
                             );
                         }
-                        console.log(data);
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         console.error(xhr);

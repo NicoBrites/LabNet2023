@@ -53,7 +53,6 @@
 
         crearBoton.addEventListener("click", () => {
             if (validarCadena(companyName.value.trim()) && validarCadena(contactName.value) && validarCadena(contactTitle.value)) {
-                console.log("ENTRA PERO NO HACE NADA EL ***");
                 $.ajax({
                     url: '@Url.Action("Administrator", "Suppliers")',
                     type: 'POST',
@@ -80,8 +79,7 @@
                                 'Error!',
                                 '' + dataError,
                                 'error'
-                            );
-                        
+                            );                       
                         }
                         console.log(data);
                     },
@@ -100,13 +98,7 @@
         });
 
         updatearBoton.addEventListener("click", () => {
-
             if (validarCadena(companyName.value.trim()) && validarCadena(contactName.value) && validarCadena(contactTitle.value)) {
-                console.log(supplierId.value)
-                console.log(companyName.value)
-                console.log(contactName.value)
-                console.log(contactTitle.value)
-
                 if (isNaN(supplierId.value) || supplierId.value < 1) {
                     Swal.fire(
                         'Error!',
