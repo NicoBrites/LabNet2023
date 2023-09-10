@@ -66,7 +66,7 @@
         const shipperId = document.getElementById("shipperId");
 
         crearBoton.addEventListener("click", () => {
-            if (validarCadena(companyName.value.trim()) && validarCadena(phone.value.trim())) {
+            if (validarCadena(companyName.value.trim()) && validarCadena(phone.value)) {
                 console.log("ENTRA PERO NO HACE NADA EL ***");
                 $.ajax({
                     url: '@Url.Action("Administrator", "Shippers")',
@@ -89,11 +89,12 @@
                                 }
                             });
                         } else {
-                                Swal.fire(
-                                    'Error!',
-                                    'Te excediste claramente del limite de caracteres (24 phone - 40 companyName)',
-                                    'error'
-                                ); 
+                            const dataError = data.textStatus.toString()
+                            Swal.fire(
+                                'Error!',
+                                '' + dataError,
+                                'error'
+                            );
                         }
                         console.log(data);
                     },
@@ -112,7 +113,7 @@
         });
 
         updatearBoton.addEventListener("click", () => {
-            if (validarCadena(companyName.value.trim()) && validarCadena(phone.valuetrim())) {
+            if (validarCadena(companyName.value.trim()) && validarCadena(phone.value)) {
                 console.log(shipperId.value)
                 if (isNaN(shipperId.value) || shipperId.value < 1) {
                     Swal.fire(
@@ -143,19 +144,12 @@
                                     }
                                 });
                             } else {
-                                if (data.textStatus == "Error! Ingreso un id inexistente") {
-                                    Swal.fire(
-                                        'Error!',
-                                        'Ingreso un id inexistente',
-                                        'error'
-                                    );
-                                } else {
-                                    Swal.fire(
-                                        'Error!',
-                                        'Te excediste claramente del limite de caracteres (24 phone - 40 companyName)',
-                                        'error'
-                                    );
-                                }
+                                const dataError = data.textStatus.toString()
+                                Swal.fire(
+                                    'Error!',
+                                    '' + dataError,
+                                    'error'
+                                );
                             }
                         },
                         error: function (xhr, textStatus, errorThrown) {
@@ -174,7 +168,7 @@
         });
 
         function validarCadena(cadena) {
-            var regex = /^[a-zA-Z0-9\s]+$/;
+            var regex = /^[a-zA-Z0-9 ]*$/;
             return regex.test(cadena);
         }
 
