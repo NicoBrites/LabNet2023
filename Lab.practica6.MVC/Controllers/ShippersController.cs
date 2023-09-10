@@ -32,7 +32,6 @@ namespace Lab.practica6.MVC.Controllers
             return View();
         }
 
-
         [HttpPost]
         public ActionResult Administrator(ShippersDto shippersDto)
         {
@@ -45,24 +44,19 @@ namespace Lab.practica6.MVC.Controllers
                     CompanyName = shippersDto.CompanyName,
                     Phone = shippersDto.Phone
                 };
-                if (shippersEntity.CompanyName.Length > 40 || shippersEntity.Phone.Length > 24)
+                
+                if (shippersDto.ShipperID == 0)
                 {
-                    return Json(new { result = false , textStatus = "length error" });
+                    result = logic.Add(shippersEntity);
                 }
                 else
                 {
-                    if (shippersDto.ShipperID == 0)
-                    {
-                        result = logic.Add(shippersEntity);
-                    }
-                    else
-                    {
-                        result = logic.Update(shippersEntity);
-                    }
-                    return Json(new { result = result });
-                }   
+                    result = logic.Update(shippersEntity);
+                }
+                return Json(new { result = result });
+                 
             }
-            catch (Exception ex) // HACER ALGO CON ESTE ERROR
+            catch (Exception ex) 
             {
                 return Json(new { textStatus = ex.Message });
             }
@@ -70,12 +64,10 @@ namespace Lab.practica6.MVC.Controllers
         [HttpPost]
         public ActionResult DeleteShipper(int id)
         {
- 
+
             bool result = logic.Delete(id);
             return Json(new { result = result });
- 
- 
-        }
 
+        }
     }
 }

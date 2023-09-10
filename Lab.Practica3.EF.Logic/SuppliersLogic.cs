@@ -52,15 +52,24 @@ namespace Lab.Practica3.EF.Logic
             var supplierUpdate = context.Suppliers.Find(supplier.SupplierID);
             if (supplierUpdate != null)
             {
-                supplierUpdate.CompanyName = supplier.CompanyName;
-                supplierUpdate.ContactName = supplier.ContactName;
-                supplierUpdate.ContactTitle = supplier.ContactTitle;
+                if (supplierUpdate.CompanyName.Length > 40 ||
+                    supplierUpdate.ContactName.Length > 30 ||
+                    supplierUpdate.ContactTitle.Length > 30)
+                {
+                    throw new Exception("Error! Te excediste de la cantidad de caracteres");
+                }
+                else
+                { 
+                    supplierUpdate.CompanyName = supplier.CompanyName;
+                    supplierUpdate.ContactName = supplier.ContactName;
+                    supplierUpdate.ContactTitle = supplier.ContactTitle;
 
-                return context.SaveChanges() > 0;
+                    return context.SaveChanges() > 0;
+                }
             }
             else
             {
-                throw new Exception("Ingreso un id inexistente");
+                throw new Exception("Error! Ingreso un id inexistente");
             }
 
         }

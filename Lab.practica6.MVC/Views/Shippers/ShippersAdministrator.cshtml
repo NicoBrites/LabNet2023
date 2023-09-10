@@ -112,7 +112,7 @@
         });
 
         updatearBoton.addEventListener("click", () => {
-            if (validarCadena(companyName.value) && validarCadena(phone.value)) {
+            if (validarCadena(companyName.value.trim()) && validarCadena(phone.valuetrim())) {
                 console.log(shipperId.value)
                 if (isNaN(shipperId.value) || shipperId.value < 1) {
                     Swal.fire(
@@ -146,7 +146,7 @@
                                 if (data.textStatus == "Error! Ingreso un id inexistente") {
                                     Swal.fire(
                                         'Error!',
-                                        'Error! Ingreso un id inexistente',
+                                        'Ingreso un id inexistente',
                                         'error'
                                     );
                                 } else {
@@ -167,7 +167,7 @@
             else {
                 Swal.fire(
                     'Error!',
-                    'Usaste un caracter especial o dejaste vacio, en el name o el phone...',
+                    'Usaste un caracter especial o dejaste vacio, en alguno de las cajas de texto',
                     'error'
                 );
             }

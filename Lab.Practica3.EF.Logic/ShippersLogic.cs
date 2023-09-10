@@ -39,20 +39,26 @@ namespace Lab.Practica3.EF.Logic
 
         public bool Update(Shippers shipper)
         {
-            bool result = false;
+
             var shipperUpdate = context.Shippers.Find(shipper.ShipperID);
             if (shipperUpdate != null)
             {
-                shipperUpdate.CompanyName = shipper.CompanyName;
-                shipperUpdate.Phone = shipper.Phone;
+                if (shipperUpdate.CompanyName.Length > 40 || shipperUpdate.Phone.Length > 24)
+                {
+                    throw new Exception("Error! Te excediste de la cantidad de caracteres");
+                }
+                else
+                {
+                    shipperUpdate.CompanyName = shipper.CompanyName;
+                    shipperUpdate.Phone = shipper.Phone;
 
-                result = context.SaveChanges() > 0;
+                    return context.SaveChanges() > 0;
+                }
             }
             else
             {
                 throw new Exception("Error! Ingreso un id inexistente");
             }
-            return result;
         }
     }
 }

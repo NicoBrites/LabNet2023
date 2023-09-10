@@ -37,6 +37,7 @@ namespace Lab.practica6.MVC.Controllers
         [HttpPost]
         public ActionResult Administrator(SuppliersDto suppliersDto)
         {
+            bool result;
             try
             {
                 Suppliers supplierEntity = new Suppliers
@@ -48,32 +49,25 @@ namespace Lab.practica6.MVC.Controllers
                 };
                 if (suppliersDto.SupplierID == 0)
                 {
-                    logic.Add(supplierEntity);
+                    result = logic.Add(supplierEntity);
                 }
                 else
                 {
-                    logic.Update(supplierEntity);
+                   result = logic.Update(supplierEntity);
                 }
-
-                return Json(new { textStatus = "success" });
+                return Json(new { result = result });
             }
-            catch (Exception ex) // HACER ALGO CON ESTE ERROR
+            catch (Exception ex) 
             {
-                return RedirectToAction("Index", "Error");
+                return Json(new { textStatus = ex.Message });
             }
         }
         [HttpPost]
         public ActionResult DeleteSupplier(int id)
         {
-            try
-            {
-                logic.Delete(id);
-                return Json(new { textStatus = "success" });
-            }
-            catch (Exception e)
-            {
-                return Json(new { textStatus = "error" });
-            }
+
+            bool result = logic.Delete(id);
+            return Json(new { result = result });
 
         }
     }

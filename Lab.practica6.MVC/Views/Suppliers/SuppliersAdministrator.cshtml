@@ -63,32 +63,35 @@
                         contactTitle: contactTitle.value
                     },
                     success: function (data) {
+                        if (data.result) {
+                            Swal.fire({
+                                title: 'Bien!',
+                                text: 'Supplier creado!',
+                                icon: 'success',
+                                confirmButtonText: 'OK',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "index";
+                                }
+                            });
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                'Te excediste claramente del limite de caracteres (30 contactName - 40 companyName - 30 contactTitle)',
+                                'error'
+                            );
+                        }
                         console.log(data);
-                        Swal.fire({
-                            title: 'Bien!',
-                            text: 'Supplier creado!',
-                            icon: 'success',
-                            confirmButtonText: 'OK',
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = "index";
-                            }
-                        });
                     },
-                    error: function () {
-                        console.error("Error")
-                        Swal.fire(
-                            'Error!',
-                            'No se pudo crear, por favor volver a intentar!',
-                            'error'
-                        );
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.error(xhr);
                     }
                 });
             }
             else {
                 Swal.fire(
                     'Error!',
-                    'Usaste un caracter especial o dejaste vacio un cuadrito de texto',
+                    'Usaste un caracter especial o dejaste vacio, en alguno de las cajas de texto',
                     'error'
                 );
             }
@@ -119,25 +122,36 @@
                             contactTitle: contactTitle.value
                         },
                         success: function (data) {
-                            console.log(data);
-                            Swal.fire({
-                                title: 'Bien!',
-                                text: 'Supplier modificado!',
-                                icon: 'success',
-                                confirmButtonText: 'OK',
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    window.location.href = "index";
+                            if (data.result) {
+                                console.log(data);
+                                Swal.fire({
+                                    title: 'Bien!',
+                                    text: 'Supplier modificado!',
+                                    icon: 'success',
+                                    confirmButtonText: 'OK',
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.href = "index";
+                                    }
+                                });
+                            } else {
+                                if (data.textStatus == "Error! Ingreso un id inexistente") {
+                                    Swal.fire(
+                                        'Error!',
+                                        'Ingreso un id inexistente',
+                                        'error'
+                                    );
+                                } else {
+                                    Swal.fire(
+                                        'Error!',
+                                        'Te excediste claramente del limite de caracteres (30 contactName - 40 companyName - 30 contactTitle)',
+                                        'error'
+                                    );
                                 }
-                            });
+                            }
                         },
-                        error: function () {
-                            console.error("Error")
-                            Swal.fire(
-                                'Error!',
-                                'No se pudo modificar, por favor volver a intentar!',
-                                'error'
-                            );
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.error(xhr);
                         }
                     });
                 }
