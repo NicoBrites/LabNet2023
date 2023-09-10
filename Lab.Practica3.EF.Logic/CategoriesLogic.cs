@@ -23,7 +23,7 @@ namespace Lab.Practica3.EF.Logic
             return (Categories)context.Categories.Find(id);
         }
 
-        public void Delete(int id)
+        public bool Delete(int id)
         {
             var categoryAEliminar = context.Categories.Find(id);
 
@@ -32,22 +32,22 @@ namespace Lab.Practica3.EF.Logic
 
             context.Categories.Remove(categoryAEliminar);
 
-            context.SaveChanges();
+            return context.SaveChanges() >0;
 
         }
-        public void Add(Categories category)
+        public bool Add(Categories category)
         {
             context.Categories.Add(category);
-            context.SaveChanges();
+            return context.SaveChanges() > 0;
         }
 
-        public void Update(Categories category)
+        public bool Update(Categories category)
         {
             var categoryUpdate = context.Categories.Find(category.CategoryID);
 
             categoryUpdate.Description = category.Description;
 
-            context.SaveChanges();
+            return context.SaveChanges() > 0;
         }
     }
 }

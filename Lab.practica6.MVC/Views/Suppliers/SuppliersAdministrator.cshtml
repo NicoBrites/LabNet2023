@@ -52,7 +52,7 @@
         const supplierId = document.getElementById("supplierId");
 
         crearBoton.addEventListener("click", () => {
-            if (validarCadena(companyName.value) && validarCadena(contactName.value) && validarCadena(contactTitle.value)) {// aca
+            if (validarCadena(companyName.value.trim()) && validarCadena(contactName.value.trim()) && validarCadena(contactTitle.value.trim())) {
                 console.log("ENTRA PERO NO HACE NADA EL ***");
                 $.ajax({
                     url: '@Url.Action("Administrator", "Suppliers")',

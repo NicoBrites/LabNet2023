@@ -23,7 +23,7 @@ namespace Lab.Practica3.EF.Logic
             return (Suppliers)context.Suppliers.Find(id);
         }
 
-        public void Delete(int id)
+        public bool Delete(int id)
         {
             var supplierAEliminar = context.Suppliers.Find(id);
 
@@ -38,16 +38,16 @@ namespace Lab.Practica3.EF.Logic
                 producto.SupplierID = null; // O cualquier otro valor de SupplierID válido
             }
 
-            context.SaveChanges();
+            return context.SaveChanges() > 0;
 
         }
-        public void Add(Suppliers supplier)
+        public bool Add(Suppliers supplier)
         {
             context.Suppliers.Add(supplier);
-            context.SaveChanges();
+            return context.SaveChanges() > 0;
         }
 
-        public void Update(Suppliers supplier)
+        public bool Update(Suppliers supplier)
         {
             var supplierUpdate = context.Suppliers.Find(supplier.SupplierID);
             if (supplierUpdate != null)
@@ -56,7 +56,7 @@ namespace Lab.Practica3.EF.Logic
                 supplierUpdate.ContactName = supplier.ContactName;
                 supplierUpdate.ContactTitle = supplier.ContactTitle;
 
-                context.SaveChanges();
+                return context.SaveChanges() > 0;
             }
             else
             {

@@ -66,7 +66,7 @@
         const shipperId = document.getElementById("shipperId");
 
         crearBoton.addEventListener("click", () => {
-            if (validarCadena(companyName.value) && validarCadena(phone.value)) {
+            if (validarCadena(companyName.value.trim()) && validarCadena(phone.value.trim())) {
                 console.log("ENTRA PERO NO HACE NADA EL ***");
                 $.ajax({
                     url: '@Url.Action("Administrator", "Shippers")',
@@ -76,39 +76,42 @@
                         phone: phone.value
                     },
                     success: function (data) {
+                        if (data.result) {
+                            console.log(data);
+                            Swal.fire({
+                                title: 'Bien!',
+                                text: 'Shipper creado!',
+                                icon: 'success',
+                                confirmButtonText: 'OK',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "index";
+                                }
+                            });
+                        } else {
+                                Swal.fire(
+                                    'Error!',
+                                    'Te excediste claramente del limite de caracteres (24 phone - 40 companyName)',
+                                    'error'
+                                ); 
+                        }
                         console.log(data);
-                        Swal.fire({
-                            title: 'Bien!',
-                            text: 'Shipper creado!',
-                            icon: 'success',
-                            confirmButtonText: 'OK',
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = "index";
-                            }
-                        });    
                     },
-                    error: function () {
-                        console.error("Error")
-                        Swal.fire(
-                            'Error!',
-                            'No se pudo crear, por favor volver a intentar!',
-                            'error'
-                        );
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.error(xhr);
                     }
                 });
             }
             else {
                 Swal.fire(
                     'Error!',
-                    'Usaste un caracter especial o dejaste vacio, en el name o el phone...',
+                    'Usaste un caracter especial o dejaste vacio, en alguno de las cajas de texto',
                     'error'
                 );
             }
         });
 
         updatearBoton.addEventListener("click", () => {
-
             if (validarCadena(companyName.value) && validarCadena(phone.value)) {
                 console.log(shipperId.value)
                 if (isNaN(shipperId.value) || shipperId.value < 1) {
@@ -127,25 +130,36 @@
                             phone: phone.value
                         },
                         success: function (data) {
-                            console.log(data);
-                            Swal.fire({
-                                title: 'Bien!',
-                                text: 'Shipper modificado!',
-                                icon: 'success',
-                                confirmButtonText: 'OK',
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    window.location.href = "index";
+                            if (data.result) {
+                                console.log(data);
+                                Swal.fire({
+                                    title: 'Bien!',
+                                    text: 'Shipper modificado!',
+                                    icon: 'success',
+                                    confirmButtonText: 'OK',
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.href = "index";
+                                    }
+                                });
+                            } else {
+                                if (data.textStatus == "Error! Ingreso un id inexistente") {
+                                    Swal.fire(
+                                        'Error!',
+                                        'Error! Ingreso un id inexistente',
+                                        'error'
+                                    );
+                                } else {
+                                    Swal.fire(
+                                        'Error!',
+                                        'Te excediste claramente del limite de caracteres (24 phone - 40 companyName)',
+                                        'error'
+                                    );
                                 }
-                            });
+                            }
                         },
-                        error: function () {
-                            console.error("Error")
-                            Swal.fire(
-                                'Error!',
-                                'No se pudo modificar, por favor volver a intentar!',
-                                'error'
-                            );
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.error(xhr);
                         }
                     });
                 }

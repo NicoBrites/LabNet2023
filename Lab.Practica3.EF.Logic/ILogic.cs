@@ -13,11 +13,11 @@ namespace Lab.Practica3.EF.Logic
 
         T GetById(int id);
 
-        void Delete(int id);
+        bool Delete(int id);
 
-        void Update(T entity);
+        bool Update(T entity);
 
-        void Add(T entity);
+        bool Add(T entity);
 
     }
 }

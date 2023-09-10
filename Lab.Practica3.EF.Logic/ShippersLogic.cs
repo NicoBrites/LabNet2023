@@ -21,36 +21,38 @@ namespace Lab.Practica3.EF.Logic
             return (Shippers)context.Shippers.Find(id);
         }
 
-        public void Delete(int id)
+        public bool Delete(int id)
         {
             var shipperAEliminar = context.Shippers.Find(id);
 
             context.Shippers.Remove(shipperAEliminar);
 
-            context.SaveChanges();
+            return context.SaveChanges() > 0;
 
         }
-        public void Add(Shippers shipper)
+        public bool Add(Shippers shipper)
         {
             context.Shippers.Add(shipper);
-            context.SaveChanges();
+            return context.SaveChanges() > 0;
+
         }
 
-        public void Update(Shippers shipper)
+        public bool Update(Shippers shipper)
         {
+            bool result = false;
             var shipperUpdate = context.Shippers.Find(shipper.ShipperID);
             if (shipperUpdate != null)
             {
                 shipperUpdate.CompanyName = shipper.CompanyName;
                 shipperUpdate.Phone = shipper.Phone;
 
-                context.SaveChanges();
+                result = context.SaveChanges() > 0;
             }
             else
             {
-                throw new Exception("Ingreso un id inexistente");
+                throw new Exception("Error! Ingreso un id inexistente");
             }
-           
+            return result;
         }
     }
 }

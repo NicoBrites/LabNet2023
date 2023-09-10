@@ -36,6 +36,7 @@ namespace Lab.practica6.MVC.Controllers
         [HttpPost]
         public ActionResult Administrator(ShippersDto shippersDto)
         {
+            bool result;
             try
             {
                 Shippers shippersEntity = new Shippers
@@ -44,35 +45,36 @@ namespace Lab.practica6.MVC.Controllers
                     CompanyName = shippersDto.CompanyName,
                     Phone = shippersDto.Phone
                 };
-                if (shippersDto.ShipperID == 0)
+                if (shippersEntity.CompanyName.Length > 40 || shippersEntity.Phone.Length > 24)
                 {
-                    logic.Add(shippersEntity);
+                    return Json(new { result = false , textStatus = "length error" });
                 }
                 else
                 {
-                    logic.Update(shippersEntity);
-                }
-
-                return Json(new { textStatus = "success" });
+                    if (shippersDto.ShipperID == 0)
+                    {
+                        result = logic.Add(shippersEntity);
+                    }
+                    else
+                    {
+                        result = logic.Update(shippersEntity);
+                    }
+                    return Json(new { result = result });
+                }   
             }
             catch (Exception ex) // HACER ALGO CON ESTE ERROR
             {
-                return RedirectToAction("Index", "Error");
+                return Json(new { textStatus = ex.Message });
             }
         }
         [HttpPost]
         public ActionResult DeleteShipper(int id)
         {
-            try
-            {
-                logic.Delete(id);
-                return Json(new { textStatus = "success" });
-            }
-            catch (Exception e)
-            {
-                return Json(new { textStatus = "error" });
-            }
-          
+ 
+            bool result = logic.Delete(id);
+            return Json(new { result = result });
+ 
+ 
         }
 
     }
