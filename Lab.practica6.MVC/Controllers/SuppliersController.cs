@@ -33,8 +33,6 @@ namespace Lab.practica6.MVC.Controllers
             return View();
         }
 
-
-        [HttpPost]
         public ActionResult Administrator(SuppliersDto suppliersDto)
         {
             bool result;
@@ -62,7 +60,6 @@ namespace Lab.practica6.MVC.Controllers
                 return Json(new { textStatus = ex.Message });
             }
         }
-        [HttpPost]
         public ActionResult DeleteSupplier(int id)
         {
 
