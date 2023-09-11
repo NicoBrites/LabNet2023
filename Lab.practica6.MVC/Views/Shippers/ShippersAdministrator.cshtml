@@ -33,27 +33,6 @@
         </div>
         <button id="update" type="button" class="btn btn-info">Modificar</button>
 
-        <br>
-        <br>
-        @using (Html.BeginForm("Administrator", "Shippers", FormMethod.Post))
-        {
-            <h5>Agregue un nuevo Shipper:</h5>
-
-            <label>CompanyName: </label>
-            @Html.TextBoxFor(s => s.CompanyName)
-            <label>Phone: </label>
-            @Html.TextBoxFor(s => s.Phone)
-            <br><br>
-            <input type="submit" value="Agregar" />
-            <br><br>
-            <h5>Modifique un Shipper ingresando su ID:</h5>
-            <label>ID: </label>
-            @Html.TextBoxFor(s => s.ShipperID)
-            <br><br>
-            <input type="submit" value="Modificar" />
-        }
-
-
     </div>
 </body>
 </html>

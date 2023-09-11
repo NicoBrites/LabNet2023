@@ -48,7 +48,7 @@ namespace Lab.Practica3.EF.Logic
                (supplier.ContactName != null && supplier.ContactName.Length > 30) ||
                (supplier.ContactTitle != null && supplier.ContactTitle.Length > 30))
             {
-                throw new Exception("Error! Te excediste de la cantidad de caracteres");
+                throw new Exception("Error! Te excediste de la cantidad maxima de caracteres");
             }
             else if (supplier.CompanyName == null)
             {
@@ -70,7 +70,7 @@ namespace Lab.Practica3.EF.Logic
                     (supplier.ContactName != null && supplier.ContactName.Length > 30) ||
                     (supplier.ContactTitle != null && supplier.ContactTitle.Length > 30))
                 {
-                    throw new Exception("Error! Te excediste de la cantidad de caracteres");
+                    throw new Exception("Error! Te excediste de la cantidad maxima de caracteres");
                 }
                 else if (supplier.CompanyName == null)
                 {

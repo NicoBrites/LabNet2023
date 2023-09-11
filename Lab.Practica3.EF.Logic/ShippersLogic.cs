@@ -35,7 +35,7 @@ namespace Lab.Practica3.EF.Logic
             if (shipper.CompanyName != null && shipper.CompanyName.Length > 40 ||
                 (shipper.Phone != null && shipper.Phone.Length > 24))
             {
-                throw new Exception("Error! Te excediste de la cantidad de caracteres");
+                throw new Exception("Error! Te excediste de la cantidad maxima de caracteres");
             }
             else if (shipper.CompanyName == null)
             {
@@ -56,7 +56,7 @@ namespace Lab.Practica3.EF.Logic
                 if (shipper.CompanyName != null && shipper.CompanyName.Length > 40 ||
                     (shipper.Phone != null && shipper.Phone.Length > 24))
                 {
-                    throw new Exception("Error! Te excediste de la cantidad de caracteres");
+                    throw new Exception("Error! Te excediste de la cantidad maxima de caracteres");
                 }
                 else if (shipper.CompanyName == null)
                 {
