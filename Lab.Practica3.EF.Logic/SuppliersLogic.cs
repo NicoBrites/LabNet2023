@@ -43,13 +43,19 @@ namespace Lab.Practica3.EF.Logic
         }
         public bool Add(Suppliers supplier)
         {
-            if (supplier.CompanyName.Length > 40 ||
+
+            if (supplier.CompanyName != null && supplier.CompanyName.Length > 40 ||
                (supplier.ContactName != null && supplier.ContactName.Length > 30) ||
                (supplier.ContactTitle != null && supplier.ContactTitle.Length > 30))
             {
                 throw new Exception("Error! Te excediste de la cantidad de caracteres");
             }
-            else { 
+            else if (supplier.CompanyName == null)
+            {
+                throw new Exception("Error! El companyName no puede ser nulo");
+            }
+            else
+            {
                 context.Suppliers.Add(supplier);
                 return context.SaveChanges() > 0;
             }
@@ -60,14 +66,18 @@ namespace Lab.Practica3.EF.Logic
             var supplierUpdate = context.Suppliers.Find(supplier.SupplierID);
             if (supplierUpdate != null)
             {
-                if (supplier.CompanyName.Length > 40 ||
+                if (supplier.CompanyName != null && supplier.CompanyName.Length > 40 ||
                     (supplier.ContactName != null && supplier.ContactName.Length > 30) ||
                     (supplier.ContactTitle != null && supplier.ContactTitle.Length > 30))
                 {
                     throw new Exception("Error! Te excediste de la cantidad de caracteres");
                 }
+                else if (supplier.CompanyName == null)
+                {
+                    throw new Exception("Error! El companyName no puede ser nulo");
+                }
                 else
-                { 
+                {
                     supplierUpdate.CompanyName = supplier.CompanyName;
                     supplierUpdate.ContactName = supplier.ContactName;
                     supplierUpdate.ContactTitle = supplier.ContactTitle;
@@ -79,7 +89,6 @@ namespace Lab.Practica3.EF.Logic
             {
                 throw new Exception("Error! Ingreso un id inexistente");
             }
-
         }
     }
 }

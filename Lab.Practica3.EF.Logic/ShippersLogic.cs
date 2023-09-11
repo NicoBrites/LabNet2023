@@ -32,9 +32,14 @@ namespace Lab.Practica3.EF.Logic
         }
         public bool Add(Shippers shipper)
         {
-            if (shipper.CompanyName.Length > 40 || (shipper.Phone != null && shipper.Phone.Length > 24))
+            if (shipper.CompanyName != null && shipper.CompanyName.Length > 40 ||
+                (shipper.Phone != null && shipper.Phone.Length > 24))
             {
                 throw new Exception("Error! Te excediste de la cantidad de caracteres");
+            }
+            else if (shipper.CompanyName == null)
+            {
+                throw new Exception("Error! El companyName no puede ser nulo");
             }
             else
             {
@@ -45,13 +50,17 @@ namespace Lab.Practica3.EF.Logic
 
         public bool Update(Shippers shipper)
         {
-
             var shipperUpdate = context.Shippers.Find(shipper.ShipperID);
             if (shipperUpdate != null)
             {
-                if (shipper.CompanyName.Length > 40 || (shipper.Phone != null && shipper.Phone.Length > 24))
+                if (shipper.CompanyName != null && shipper.CompanyName.Length > 40 ||
+                    (shipper.Phone != null && shipper.Phone.Length > 24))
                 {
                     throw new Exception("Error! Te excediste de la cantidad de caracteres");
+                }
+                else if (shipper.CompanyName == null)
+                {
+                    throw new Exception("Error! El companyName no puede ser nulo");
                 }
                 else
                 {
