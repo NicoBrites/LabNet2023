@@ -52,7 +52,8 @@
         const supplierId = document.getElementById("supplierId");
 
         crearBoton.addEventListener("click", () => {
-            if (validarCadena(companyName.value.trim()) && validarCadena(contactName.value) && validarCadena(contactTitle.value)) {
+            if (validarCadena(companyName.value.trim()) &&
+                validarCadena(contactName.value) && validarCadena(contactTitle.value)) {
                 $.ajax({
                     url: '@Url.Action("Administrator", "Suppliers")',
                     type: 'POST',
@@ -98,7 +99,8 @@
         });
 
         updatearBoton.addEventListener("click", () => {
-            if (validarCadena(companyName.value.trim()) && validarCadena(contactName.value) && validarCadena(contactTitle.value)) {
+            if (validarCadena(companyName.value.trim()) &&
+                validarCadena(contactName.value) && validarCadena(contactTitle.value)) {
                 if (isNaN(supplierId.value) || supplierId.value < 1) {
                     Swal.fire(
                         'Error!',
