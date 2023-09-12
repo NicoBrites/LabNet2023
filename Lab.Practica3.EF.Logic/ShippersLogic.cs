@@ -16,7 +16,17 @@ namespace Lab.Practica3.EF.Logic
 
         public Shippers GetById(int id)
         {
-            return (Shippers)context.Shippers.Find(id);
+
+            Shippers shipper = context.Shippers.Find(id);
+            if (shipper != null)
+            {
+                throw new Exception("No existe ese ID");
+            }
+            else
+            {
+                return shipper;
+            }
+
         }
 
         public bool Delete(int id)
@@ -56,7 +66,7 @@ namespace Lab.Practica3.EF.Logic
                 {
                     throw new Exception("Error! Te excediste de la cantidad maxima de caracteres");
                 }
-                else if (shipper.CompanyName == null)
+                else if (shipper.CompanyName == null || shipper.CompanyName == "")
                 {
                     throw new Exception("Error! El companyName no puede ser nulo");
                 }
