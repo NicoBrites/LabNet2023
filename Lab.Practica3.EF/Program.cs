@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace Lab.Practica3.EF
 {
     public class Program
