@@ -1,0 +1,23 @@
+﻿﻿@model List<Lab.Practica3.EF.Entities.Dto.DigimonDto>
+@{
+    ViewBag.Title = "Lista de Digimones";
+}
+
+<h1>Lista de digimones</h1>
+
+<div class="container">
+    <div class="row">
+        @foreach (var digimon in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <img src="@digimon.Img" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@digimon.Name</h5>
+                        <p class="card-text">@digimon.Level</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

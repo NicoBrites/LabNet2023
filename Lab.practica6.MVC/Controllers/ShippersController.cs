@@ -3,9 +3,7 @@ using Lab.Practica3.EF.Entities.Dto;
 using Lab.Practica3.EF.Logic;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Lab.practica6.MVC.Controllers

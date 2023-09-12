@@ -1,11 +1,7 @@
 ﻿using Lab.Practica3.EF.Data;
-using Lab.Practica3.EF.Entities.Dto;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab.Practica3.EF.Logic
 {

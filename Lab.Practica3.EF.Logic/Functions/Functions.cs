@@ -2,15 +2,6 @@
 using Lab.Practica3.EF.Logic;
 using Lab.Practica3.EF.Logic.Functions;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Lab.Practica3.EF.Functions
 {

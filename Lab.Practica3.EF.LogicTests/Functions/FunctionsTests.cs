@@ -1,13 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Lab.Practica3.EF.Functions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Lab.Practica3.EF.Logic.Functions;
-using Moq;
-using Lab.Practica3.EF.Logic;
 
 namespace Lab.Practica3.EF.Functions.Tests
 {
