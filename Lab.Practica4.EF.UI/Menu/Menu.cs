@@ -1,11 +1,5 @@
-﻿using Lab.Practica4.EF.Data;
-using Lab.Practica4.EF.Logic;
-using Lab.Practica4.EF.Logic.Functions;
+﻿using Lab.Practica4.EF.Logic.Functions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab.Practica4.EF.Menu
 {
