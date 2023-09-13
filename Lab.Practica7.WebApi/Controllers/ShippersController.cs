@@ -44,7 +44,13 @@ namespace Lab.Practica7.WebApi.Controllers
             return shippersDto;
         }
 
-        // POST: api/Orders
+        // POST: api/Shippers
+        /*
+         {
+            "CompanyName": "ejemplo",
+            "Phone": "123"
+         } 
+        */
         public IHttpActionResult Post([FromBody] ShippersDto shippersDto)
         {
             try
@@ -63,11 +69,24 @@ namespace Lab.Practica7.WebApi.Controllers
             }
 
         }
-        // PUT: api/Orders/5
-        public IHttpActionResult Put([FromBody] Shippers shippers)
+        // PUT: api/Shippers/5
+        /*
+        {
+           "CompanyName": "ejemplo",
+           "Phone": "123"
+        } 
+       */
+        public IHttpActionResult Put(int id,[FromBody] ShippersDto shippersDto)
         {
             try
             {
+                Shippers shippers = new Shippers
+                {
+                    ShipperID= id,
+                    CompanyName = shippersDto.CompanyName,
+                    Phone = shippersDto.Phone,
+                };
+
                 shippersLogic.Update(shippers);
                 return Ok("El Shipper se updateo correctamente");
 
@@ -77,5 +96,21 @@ namespace Lab.Practica7.WebApi.Controllers
                 return InternalServerError(ex);
             }
         }
+
+        // DELETE: api/Shippers/5
+        public IHttpActionResult Delete(int id)
+        {
+
+            try
+            {
+                shippersLogic.Delete(id);
+                return Ok("El Shipper se elimino correctamente");
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
     }
 }

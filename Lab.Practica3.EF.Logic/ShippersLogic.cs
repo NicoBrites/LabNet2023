@@ -18,7 +18,7 @@ namespace Lab.Practica3.EF.Logic
         {
 
             Shippers shipper = context.Shippers.Find(id);
-            if (shipper != null)
+            if (shipper == null)
             {
                 throw new Exception("No existe ese ID");
             }
@@ -31,12 +31,18 @@ namespace Lab.Practica3.EF.Logic
 
         public bool Delete(int id)
         {
-            var shipperAEliminar = context.Shippers.Find(id);
+            try
+            {
+                var shipperAEliminar = context.Shippers.Find(id);
 
-            context.Shippers.Remove(shipperAEliminar);
+                context.Shippers.Remove(shipperAEliminar);
 
-            return context.SaveChanges() > 0;
-
+                return context.SaveChanges() > 0;
+            }
+            catch (Exception)
+            {
+                throw new Exception("El id ingresado no existe");
+            }
         }
         public bool Add(Shippers shipper)
         {
@@ -45,7 +51,7 @@ namespace Lab.Practica3.EF.Logic
             {
                 throw new Exception("Error! Te excediste de la cantidad maxima de caracteres");
             }
-            else if (shipper.CompanyName == null)
+            else if (shipper.CompanyName == null || shipper.CompanyName == "")
             {
                 throw new Exception("Error! El companyName no puede ser nulo");
             }

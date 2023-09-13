@@ -16,26 +16,40 @@ namespace Lab.Practica3.EF.Logic
 
         public Suppliers GetById(int id)
         {
-            return (Suppliers)context.Suppliers.Find(id);
+            Suppliers supplier = context.Suppliers.Find(id);
+            if (supplier == null)
+            {
+                throw new Exception("No existe ese ID");
+            }
+            else
+            {
+                return supplier;
+            }
         }
 
         public bool Delete(int id)
         {
-            var supplierAEliminar = context.Suppliers.Find(id);
-
-            context.Suppliers.Remove(supplierAEliminar);
-
-            var productosRelacionados = context.Products
-                .Where(p => p.SupplierID == supplierAEliminar.SupplierID);
-
-            // Actualiza SupplierID a NULL (u otro valor válido) para esos productos
-            foreach (var producto in productosRelacionados)
+            try
             {
-                producto.SupplierID = null; // O cualquier otro valor de SupplierID válido
+                var supplierAEliminar = context.Suppliers.Find(id);
+
+                context.Suppliers.Remove(supplierAEliminar);
+
+                var productosRelacionados = context.Products
+                    .Where(p => p.SupplierID == supplierAEliminar.SupplierID);
+
+                // Actualiza SupplierID a NULL (u otro valor válido) para esos productos
+                foreach (var producto in productosRelacionados)
+                {
+                    producto.SupplierID = null; // O cualquier otro valor de SupplierID válido
+                }
+
+                return context.SaveChanges() > 0;
             }
-
-            return context.SaveChanges() > 0;
-
+            catch (Exception) 
+            {
+                throw new Exception("El id ingresado no existe");
+            }
         }
         public bool Add(Suppliers supplier)
         {
@@ -46,7 +60,7 @@ namespace Lab.Practica3.EF.Logic
             {
                 throw new Exception("Error! Te excediste de la cantidad maxima de caracteres");
             }
-            else if (supplier.CompanyName == null)
+            else if (supplier.CompanyName == null || supplier.CompanyName == "")
             {
                 throw new Exception("Error! El companyName no puede ser nulo");
             }
@@ -68,7 +82,7 @@ namespace Lab.Practica3.EF.Logic
                 {
                     throw new Exception("Error! Te excediste de la cantidad maxima de caracteres");
                 }
-                else if (supplier.CompanyName == null)
+                else if (supplier.CompanyName == null || supplier.CompanyName == "")
                 {
                     throw new Exception("Error! El companyName no puede ser nulo");
                 }
