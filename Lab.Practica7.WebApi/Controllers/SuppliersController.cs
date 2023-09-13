@@ -4,7 +4,6 @@ using Lab.Practica3.EF.Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using System.Web.Http;
 
 namespace Lab.Practica7.WebApi.Controllers
