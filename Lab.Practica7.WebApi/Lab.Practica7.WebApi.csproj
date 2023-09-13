@@ -315,7 +315,14 @@
   </Target>
   <Import Project="..\Lab.Practica3.EF\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\Lab.Practica3.EF\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <Import Project="..\Lab.Practica3.EF\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\Lab.Practica3.EF\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+	<Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
+		<ItemGroup>
+			<RoslynFiles Include="$(CscToolPath)\*" />
+		</ItemGroup>
+		<MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
+		<Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
+	</Target>
+	<!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
