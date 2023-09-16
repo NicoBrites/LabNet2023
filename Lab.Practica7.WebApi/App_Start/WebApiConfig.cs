@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Lab.Practica7.WebApi
 {
@@ -7,7 +8,8 @@ namespace Lab.Practica7.WebApi
         public static void Register(HttpConfiguration config)
         {
             // Configuración y servicios de Web API
-
+            var cors = new EnableCorsAttribute("http://localhost:4200", "*", "*");
+            config.EnableCors(cors);
             // Rutas de Web API
             config.MapHttpAttributeRoutes();
 
