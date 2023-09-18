@@ -1,0 +1,19 @@
+.table{
+    width: 100%;
+    
+}
+.bodyHome{
+    margin: 40px;
+}
+.title{
+    text-align:justify;
+    margin: 40px;
+    font-size: 45px; 
+}
+.linea{
+    margin: 40px; 
+}
+.container{
+    margin: 40px; 
+    font-family: "Helvetica", sans-serif;
+}
