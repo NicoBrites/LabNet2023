@@ -10,6 +10,8 @@
             <div class="form-text" id="basic-addon4" *ngIf="form.get('companyName')!.hasError('caracteresEspeciales')">
                 No se permiten caracteres especiales.
                 </div>
+                <div class="form-text" id="basic-addon4" *ngIf="form.get('companyName')!.hasError('espacioEnBlanco')"
+            >El nombre puede contener espacios en blanco.</div>
         </div>
         <div class="form-group">
             <label class="col-form-label">ContactName:</label>

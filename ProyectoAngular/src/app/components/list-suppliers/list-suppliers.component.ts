@@ -38,10 +38,6 @@ export class ListSuppliersComponent implements OnInit{
 
   ngOnInit(): void{
     this.getAllSuppliers();
-    /*this.route.paramMap.subscribe(params => {
-      this.datosRecibidos = JSON.parse(params.get('datos')!);
-      console.log(this.datosRecibidos);    
-    });*/
   }
 
   ngAfterViewInit() {
@@ -93,7 +89,7 @@ export class ListSuppliersComponent implements OnInit{
     const dialogRef = this.dialog.open(AdministratorSuppliersComponent, {data : this.supplierEnviado })
     dialogRef.afterClosed().subscribe(res => {
     console.log(res)
-    if (res != false)
+    if (res != false && res != null)
       {
         this.suppliersService.updateSupplier(supplier.SupplierID, res).subscribe({
           complete: ()=>{
@@ -109,10 +105,14 @@ export class ListSuppliersComponent implements OnInit{
   }
 
   createNewSupplier(){
-    const dialogRef = this.dialog.open(AdministratorSuppliersComponent, {})
+    var CompanyName = "ESTOYVALIDANDOQUENOESUNEDIT";
+    var ContactName = "";
+    var ContactTitle = "";
+    this.supplierEnviado = {CompanyName ,ContactName, ContactTitle }
+    const dialogRef = this.dialog.open(AdministratorSuppliersComponent, {data : this.supplierEnviado})
     dialogRef.afterClosed().subscribe(res => {
     console.log(res)
-    if (res != false)
+    if (res != false && res != null)
       {
         this.suppliersService.postSupplier(res).subscribe({
           complete: ()=>{
@@ -124,7 +124,7 @@ export class ListSuppliersComponent implements OnInit{
           alert(err.error.message);
         }
         })
-      }   
+      }  
     })
   }
 
@@ -139,7 +139,6 @@ export class ListSuppliersComponent implements OnInit{
         }
       }
     )
-  }
- 
+  } 
 }
 

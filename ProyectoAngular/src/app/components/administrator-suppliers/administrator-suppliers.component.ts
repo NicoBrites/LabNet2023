@@ -20,7 +20,8 @@ export class AdministratorSuppliersComponent implements OnInit {
   constructor(private readonly fb: FormBuilder,  private service: SuppliersService, 
     private _snackBar: MatSnackBar, public dialogRef: MatDialogRef<AdministratorSuppliersComponent>,
     @Inject(MAT_DIALOG_DATA) public supplierUpdate: SupplierUpdate ) {}
-    //Getters
+
+  //Getters
   
   get companyNameGet(): AbstractControl{
     return this.form.get('companyName')!;
@@ -32,6 +33,13 @@ export class AdministratorSuppliersComponent implements OnInit {
 
   get contactTitleGet(): AbstractControl{
     return this.form.get('contactTitle')!;
+  }
+
+  noEspacioEnBlanco(control: AbstractControl):  Validators | null{
+    if (control.value && control.value.trim() === '') {
+      return { 'espacioEnBlanco': true };
+    }
+    return null;
   }
 
   noCaracteresEspeciales(control: AbstractControl): Validators | null {
@@ -46,13 +54,22 @@ export class AdministratorSuppliersComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      companyName: [this.supplierUpdate.CompanyName.trim(), [Validators.required, Validators.maxLength(40), this.noCaracteresEspeciales]],
-      contactName: [this.supplierUpdate.ContactName.trim(), [Validators.maxLength(30), this.noCaracteresEspeciales]],
-      contactTitle: [this.supplierUpdate.ContactTitle.trim(), [Validators.maxLength(30), this.noCaracteresEspeciales]]
-      
+      companyName: [''.trim(), [Validators.required, Validators.maxLength(40), this.noCaracteresEspeciales, this.noEspacioEnBlanco]],
+      contactName: [''.trim(), [Validators.maxLength(30), this.noCaracteresEspeciales]],
+      contactTitle: [''.trim(), [Validators.maxLength(30), this.noCaracteresEspeciales]]
     });
-  }
+    if (this.supplierUpdate.CompanyName !== "ESTOYVALIDANDOQUENOESUNEDIT")
+    {
+      console.log("asd")
+      this.form.setValue({
+        companyName: this.supplierUpdate.CompanyName,
+        contactName: this.supplierUpdate.ContactName,
+        contactTitle: this.supplierUpdate.ContactTitle
+      });
+    }
 
+  }
+  
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action);
   }
@@ -65,11 +82,16 @@ export class AdministratorSuppliersComponent implements OnInit {
     var ContactName = this.contactNameGet.value;
     var ContactTitle= this.contactTitleGet.value;
     this.supplierUpdate = {CompanyName, ContactName, ContactTitle}
+    console.log("entro al update del administrator")
     return this.supplierUpdate
   }
 
   enviarFormulario() {
     const formData = this.onUpdate();
+    if (formData.CompanyName.trim() == "")
+    {
+      this.dialogRef.close(false);   
+    }
     this.dialogRef.close(formData);
   }
 
@@ -95,5 +117,4 @@ export class AdministratorSuppliersComponent implements OnInit {
       contactTitleCtrl.setValue('')
     }
   } 
-  
 }
