@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, Output, ViewChild} from '@angular/core';
 import { Supplier } from 'src/app/core/models/model-supplier';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -18,7 +18,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ListSuppliersComponent implements OnInit{
 
-  datosRecibidos! : SupplierUpdate;
+
+  public supplierEnviado! : SupplierUpdate
 
   suppliers : Supplier[] = []
 
@@ -32,15 +33,15 @@ export class ListSuppliersComponent implements OnInit{
   constructor( private suppliersService : SuppliersService,
     private _snackBar: MatSnackBar, private dialog: MatDialog, 
     private route : ActivatedRoute ){   
-
+     
   }
 
   ngOnInit(): void{
     this.getAllSuppliers();
-    this.route.paramMap.subscribe(params => {
+    /*this.route.paramMap.subscribe(params => {
       this.datosRecibidos = JSON.parse(params.get('datos')!);
       console.log(this.datosRecibidos);    
-    });
+    });*/
   }
 
   ngAfterViewInit() {
@@ -84,13 +85,17 @@ export class ListSuppliersComponent implements OnInit{
     })
   }
 
-  editSupplier(supplierId:number){
-    const dialogRef = this.dialog.open(AdministratorSuppliersComponent, {})
+  editSupplier(supplier:Supplier){
+    var CompanyName = supplier.CompanyName;
+    var ContactName = supplier.ContactName;
+    var ContactTitle = supplier.ContactTitle;
+    this.supplierEnviado = {CompanyName ,ContactName, ContactTitle }
+    const dialogRef = this.dialog.open(AdministratorSuppliersComponent, {data : this.supplierEnviado })
     dialogRef.afterClosed().subscribe(res => {
     console.log(res)
     if (res != false)
       {
-        this.suppliersService.updateSupplier(supplierId, res).subscribe({
+        this.suppliersService.updateSupplier(supplier.SupplierID, res).subscribe({
           complete: ()=>{
             this.openSnackBar('Supplier updateado!', 'Okey')
             setTimeout(this.refresh, 3000);
@@ -122,7 +127,6 @@ export class ListSuppliersComponent implements OnInit{
       }   
     })
   }
-
 
   getAllSuppliers(){
     this.suppliersService.getAllSuppliers().subscribe(
