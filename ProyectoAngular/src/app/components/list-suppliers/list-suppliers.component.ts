@@ -7,6 +7,9 @@ import { SuppliersService } from '../service/suppliers.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
+import { AdministratorSuppliersComponent } from '../administrator-suppliers/administrator-suppliers.component';
+import { SupplierUpdate } from 'src/app/core/models/mode-supplier-update';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-suppliers',
@@ -15,9 +18,11 @@ import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 })
 export class ListSuppliersComponent implements OnInit{
 
+  datosRecibidos! : SupplierUpdate;
+
   suppliers : Supplier[] = []
 
-  displayedColumns: string[] = ["SupplierID", "CompanyName", "ContactName", "ContactTitle",'accionDelete'];
+  displayedColumns: string[] = ["SupplierID", "CompanyName", "ContactName", "ContactTitle",'accionEdit','accionDelete'];
   
   dataSource = new MatTableDataSource<Supplier>(this.suppliers);
 
@@ -25,12 +30,17 @@ export class ListSuppliersComponent implements OnInit{
   @ViewChild(MatSort) sort! : MatSort;
 
   constructor( private suppliersService : SuppliersService,
-    private _snackBar: MatSnackBar, private dialog: MatDialog, ){ 
+    private _snackBar: MatSnackBar, private dialog: MatDialog, 
+    private route : ActivatedRoute ){   
 
   }
 
   ngOnInit(): void{
     this.getAllSuppliers();
+    this.route.paramMap.subscribe(params => {
+      this.datosRecibidos = JSON.parse(params.get('datos')!);
+      console.log(this.datosRecibidos);    
+    });
   }
 
   ngAfterViewInit() {
@@ -73,6 +83,46 @@ export class ListSuppliersComponent implements OnInit{
       }
     })
   }
+
+  editSupplier(supplierId:number){
+    const dialogRef = this.dialog.open(AdministratorSuppliersComponent, {})
+    dialogRef.afterClosed().subscribe(res => {
+    console.log(res)
+    if (res != false)
+      {
+        this.suppliersService.updateSupplier(supplierId, res).subscribe({
+          complete: ()=>{
+            this.openSnackBar('Supplier updateado!', 'Okey')
+            setTimeout(this.refresh, 3000);
+          },
+          error: (err)=>{
+            alert(err.error.message);
+            }
+          })
+      }
+    })    
+  }
+
+  createNewSupplier(){
+    const dialogRef = this.dialog.open(AdministratorSuppliersComponent, {})
+    dialogRef.afterClosed().subscribe(res => {
+    console.log(res)
+    if (res != false)
+      {
+        this.suppliersService.postSupplier(res).subscribe({
+          complete: ()=>{
+            this.openSnackBar('Supplier creado!', 'Okey')
+            setTimeout(this.refresh, 3000);
+
+          },
+        error: (err)=>{
+          alert(err.error.message);
+        }
+        })
+      }   
+    })
+  }
+
 
   getAllSuppliers(){
     this.suppliersService.getAllSuppliers().subscribe(

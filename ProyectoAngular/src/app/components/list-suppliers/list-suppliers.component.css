@@ -13,7 +13,6 @@
 .linea{
     margin: 40px; 
 }
-.container{
-    margin: 40px; 
-    font-family: "Helvetica", sans-serif;
+.addButton{
+    width: 100%;
 }

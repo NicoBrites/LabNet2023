@@ -24,6 +24,16 @@
           <th mat-header-cell *matHeaderCellDef  mat-sort-header> ContactTitle </th>
           <td mat-cell *matCellDef="let element"> {{element.ContactTitle}} </td>
         </ng-container>
+        <ng-container matColumnDef="accionEdit">
+          <th mat-header-cell *matHeaderCellDef  >Edit </th>
+          <td mat-cell *matCellDef="let element"> 
+            <div class="example-button-container">
+              <button mat-mini-fab color="warn" (click)="editSupplier(element.SupplierID)">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div> 
+          </td>
+        </ng-container>
         <ng-container matColumnDef="accionDelete">
           <th mat-header-cell *matHeaderCellDef  >Delete </th>
           <td mat-cell *matCellDef="let element"> 
@@ -45,6 +55,7 @@
       aria-label="Select page">
     </mat-paginator>   
   </div>
+  <button mat-raised-button class="addButton" color="accent" (click)="createNewSupplier()">Create new Supplier</button>
 </div>
 <hr class="linea" style="color: #0056b2;" />
 <footer>
