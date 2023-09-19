@@ -1,43 +1,42 @@
-import { Component, OnInit, Output, ViewChild } from '@angular/core';
-import { Supplier } from 'src/app/core/models/model-supplier';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { SuppliersService } from '../service/suppliers.service';
+import { ShippersService } from '../service/shippers.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
-import { AdministratorSuppliersComponent } from '../administrator-suppliers/administrator-suppliers.component';
-import { SupplierUpdate } from 'src/app/core/models/mode-supplier-update';
 import { ActivatedRoute } from '@angular/router';
+import { ShipperUpdate } from 'src/app/core/models/model-shipper-update';
+import { Shipper } from 'src/app/core/models/model-shipper';
+import { AdministratorShippersComponent } from '../administrator-shippers/administrator-shippers.component';
 
 @Component({
-  selector: 'app-list-suppliers',
-  templateUrl: './list-suppliers.component.html',
-  styleUrls: ['./list-suppliers.component.css']
+  selector: 'app-list-shippers',
+  templateUrl: './list-shippers.component.html',
+  styleUrls: ['./list-shippers.component.css']
 })
-export class ListSuppliersComponent implements OnInit {
+export class ListShippersComponent implements OnInit {
 
+  public shipperEnviado!: ShipperUpdate
 
-  public supplierEnviado!: SupplierUpdate
+  shippers: Shipper[] = []
 
-  suppliers: Supplier[] = []
+  displayedColumns: string[] = ["ShipperID", "CompanyName", "Phone", 'accionEdit', 'accionDelete'];
 
-  displayedColumns: string[] = ["SupplierID", "CompanyName", "ContactName", "ContactTitle", 'accionEdit', 'accionDelete'];
-
-  dataSource = new MatTableDataSource<Supplier>(this.suppliers);
+  dataSource = new MatTableDataSource<Shipper>(this.shippers);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private suppliersService: SuppliersService,
+  constructor(private shippersService: ShippersService,
     private _snackBar: MatSnackBar, private dialog: MatDialog,
     private route: ActivatedRoute) {
 
   }
 
   ngOnInit(): void {
-    this.getAllSuppliers();
+    this.getAllShippers();
   }
 
   ngAfterViewInit() {
@@ -61,15 +60,15 @@ export class ListSuppliersComponent implements OnInit {
     window.location.reload();
   }
 
-  deleteSupplier(supplierId: number) {
+  deleteShipper(shipperId: number) {
     const dialogRef = this.dialog.open(DialogBoxComponent, {})
 
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        this.suppliersService.deleteSupplier(supplierId).subscribe({
+        this.shippersService.deleteShipper(shipperId).subscribe({
 
           complete: () => {
-            this.openSnackBar('Supplier eliminado!', 'Okey')
+            this.openSnackBar('Shipper eliminado!', 'Okey')
             setTimeout(this.refresh, 3000);
 
           },
@@ -81,18 +80,17 @@ export class ListSuppliersComponent implements OnInit {
     })
   }
 
-  editSupplier(supplier: Supplier) {
-    var CompanyName = supplier.CompanyName;
-    var ContactName = supplier.ContactName;
-    var ContactTitle = supplier.ContactTitle;
-    this.supplierEnviado = { CompanyName, ContactName, ContactTitle }
-    const dialogRef = this.dialog.open(AdministratorSuppliersComponent, { data: this.supplierEnviado })
+  editShipper(shipper: Shipper) {
+    var CompanyName = shipper.CompanyName;
+    var Phone = shipper.Phone;
+    this.shipperEnviado = { CompanyName, Phone }
+    const dialogRef = this.dialog.open(AdministratorShippersComponent, { data: this.shipperEnviado })
     dialogRef.afterClosed().subscribe(res => {
       console.log(res)
       if (res != false && res != null) {
-        this.suppliersService.updateSupplier(supplier.SupplierID, res).subscribe({
+        this.shippersService.updateShipper(shipper.ShipperID, res).subscribe({
           complete: () => {
-            this.openSnackBar('Supplier updateado!', 'Okey')
+            this.openSnackBar('Shipper updateado!', 'Okey')
             setTimeout(this.refresh, 3000);
           },
           error: (err) => {
@@ -103,18 +101,17 @@ export class ListSuppliersComponent implements OnInit {
     })
   }
 
-  createNewSupplier() {
+  createNewShipper() {
     var CompanyName = "ESTOYVALIDANDOQUENOESUNEDIT-";
-    var ContactName = "";
-    var ContactTitle = "";
-    this.supplierEnviado = { CompanyName, ContactName, ContactTitle }
-    const dialogRef = this.dialog.open(AdministratorSuppliersComponent, { data: this.supplierEnviado })
+    var Phone = "";
+    this.shipperEnviado = { CompanyName, Phone }
+    const dialogRef = this.dialog.open(AdministratorShippersComponent, { data: this.shipperEnviado })
     dialogRef.afterClosed().subscribe(res => {
       console.log(res)
       if (res != false && res != null) {
-        this.suppliersService.postSupplier(res).subscribe({
+        this.shippersService.postShipper(res).subscribe({
           complete: () => {
-            this.openSnackBar('Supplier creado!', 'Okey')
+            this.openSnackBar('Shipper creado!', 'Okey')
             setTimeout(this.refresh, 3000);
 
           },
@@ -126,8 +123,8 @@ export class ListSuppliersComponent implements OnInit {
     })
   }
 
-  getAllSuppliers() {
-    this.suppliersService.getAllSuppliers().subscribe(
+  getAllShippers() {
+    this.shippersService.getAllShippers().subscribe(
       {
         next: (result) => {
           this.dataSource.data = result;
@@ -139,4 +136,5 @@ export class ListSuppliersComponent implements OnInit {
     )
   }
 }
+
 

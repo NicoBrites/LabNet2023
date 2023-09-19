@@ -54,7 +54,7 @@ export class AdministratorSuppliersComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      companyName: [''.trim(), [Validators.required, Validators.maxLength(40), this.noCaracteresEspeciales, this.noEspacioEnBlanco]],
+      companyName: [''.trim(), [Validators.required, Validators.maxLength(40), this.noEspacioEnBlanco]],
       contactName: [''.trim(), [Validators.maxLength(30), this.noCaracteresEspeciales]],
       contactTitle: [''.trim(), [Validators.maxLength(30), this.noCaracteresEspeciales]]
     });

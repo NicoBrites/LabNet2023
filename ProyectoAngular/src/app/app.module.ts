@@ -10,6 +10,8 @@ import { SharedModule } from './components/shared/shared.module';
 import { ListSuppliersComponent } from './components/list-suppliers/list-suppliers.component';
 import { AdministratorSuppliersComponent } from './components/administrator-suppliers/administrator-suppliers.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ListShippersComponent } from './components/list-shippers/list-shippers.component';
+import { AdministratorShippersComponent } from './components/administrator-shippers/administrator-shippers.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     ListSuppliersComponent,
     AdministratorSuppliersComponent,
     NavbarComponent,
+    ListShippersComponent,
+    AdministratorShippersComponent,
 
   ],
   imports: [

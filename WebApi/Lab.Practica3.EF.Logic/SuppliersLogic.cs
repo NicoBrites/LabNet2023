@@ -53,11 +53,32 @@ namespace Lab.Practica3.EF.Logic
         }
         public bool Add(Suppliers supplier)
         {
-            //if (Validator.ValidarCaracteresEspeciales(supplier)) 
-            //{                                          
+                                        
+            if (supplier.CompanyName != null && supplier.CompanyName.Length > 40 ||
+                (supplier.ContactName != null && supplier.ContactName.Length > 30) ||
+                (supplier.ContactTitle != null && supplier.ContactTitle.Length > 30))
+            {
+                throw new Exception("Error! Te excediste de la cantidad maxima de caracteres");
+            }
+            else if (supplier.CompanyName == null || supplier.CompanyName == "")
+            {
+                throw new Exception("Error! El companyName no puede ser nulo");
+            }
+            else
+            {
+                context.Suppliers.Add(supplier);
+                return context.SaveChanges() > 0;
+            }
+        }
+
+        public bool Update(Suppliers supplier)
+        {
+            var supplierUpdate = context.Suppliers.Find(supplier.SupplierID);
+            if (supplierUpdate != null)
+            {
                 if (supplier.CompanyName != null && supplier.CompanyName.Length > 40 ||
-                   (supplier.ContactName != null && supplier.ContactName.Length > 30) ||
-                   (supplier.ContactTitle != null && supplier.ContactTitle.Length > 30))
+                    (supplier.ContactName != null && supplier.ContactName.Length > 30) ||
+                    (supplier.ContactTitle != null && supplier.ContactTitle.Length > 30))
                 {
                     throw new Exception("Error! Te excediste de la cantidad maxima de caracteres");
                 }
@@ -67,40 +88,13 @@ namespace Lab.Practica3.EF.Logic
                 }
                 else
                 {
-                    context.Suppliers.Add(supplier);
+                    supplierUpdate.CompanyName = supplier.CompanyName;
+                    supplierUpdate.ContactName = supplier.ContactName;
+                    supplierUpdate.ContactTitle = supplier.ContactTitle;
+
                     return context.SaveChanges() > 0;
                 }
-            //}
-            //throw new Exception("Error! Ingresaste un caracter especial.");
-        }
 
-        public bool Update(Suppliers supplier)
-        {
-            var supplierUpdate = context.Suppliers.Find(supplier.SupplierID);
-            if (supplierUpdate != null)
-            {
-                // if (Validator.ValidarCaracteresEspeciales(supplier)) Las tuve que sacar porque en la db
-                //{                                        hay muchos nombres con comilla simple y me genera conflicto 
-                if (supplier.CompanyName != null && supplier.CompanyName.Length > 40 ||
-                    (supplier.ContactName != null && supplier.ContactName.Length > 30) ||
-                    (supplier.ContactTitle != null && supplier.ContactTitle.Length > 30))
-                    {
-                        throw new Exception("Error! Te excediste de la cantidad maxima de caracteres");
-                    }
-                    else if (supplier.CompanyName == null || supplier.CompanyName == "")
-                    {
-                        throw new Exception("Error! El companyName no puede ser nulo");
-                    }
-                    else
-                    {
-                        supplierUpdate.CompanyName = supplier.CompanyName;
-                        supplierUpdate.ContactName = supplier.ContactName;
-                        supplierUpdate.ContactTitle = supplier.ContactTitle;
-
-                        return context.SaveChanges() > 0;
-                    }
-               // }
-               // throw new Exception("Error! Ingresaste un caracter especial.");
             }
             else
             {

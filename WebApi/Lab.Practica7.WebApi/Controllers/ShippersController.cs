@@ -96,18 +96,11 @@ namespace Lab.Practica7.WebApi.Controllers
         }
 
         // DELETE: api/Shippers/5
-        public IHttpActionResult Delete(int id)
+        public void Delete(int id)
         {
 
-            try
-            {
-                shippersLogic.Delete(id);
-                return Ok("El Shipper se elimino correctamente");
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
+            shippersLogic.Delete(id);
+
         }
 
     }

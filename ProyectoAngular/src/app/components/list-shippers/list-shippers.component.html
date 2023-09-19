@@ -1,34 +1,30 @@
 <app-navbar></app-navbar>
-<h1 mat-typography class="title">Suppliers List</h1>
+<h1 mat-typography class="title">Shippers List</h1>
 <hr class="linea" style="color: #0056b2;" />
 <div class="bodyHome">
   <mat-form-field>
     <mat-label>Filter </mat-label>
-    <input class="filterInput" matInput (keyup)="applyFilter($event)" placeholder="Sino no ves la lista" #input>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ej. 1" #input>
   </mat-form-field>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
-      <ng-container matColumnDef="SupplierID">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> SuppliersId </th>
-        <td mat-cell *matCellDef="let element"> {{element.SupplierID}} </td>
+      <ng-container matColumnDef="ShipperID">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ShippersId </th>
+        <td mat-cell *matCellDef="let element"> {{element.ShipperID}} </td>
       </ng-container>
       <ng-container matColumnDef="CompanyName">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> CompanyName </th>
         <td mat-cell *matCellDef="let element"> {{element.CompanyName}} </td>
       </ng-container>
-      <ng-container matColumnDef="ContactName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> ContactName </th>
-        <td mat-cell *matCellDef="let element"> {{element.ContactName}} </td>
-      </ng-container>
-      <ng-container matColumnDef="ContactTitle">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> ContactTitle </th>
-        <td mat-cell *matCellDef="let element"> {{element.ContactTitle}} </td>
+      <ng-container matColumnDef="Phone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
+        <td mat-cell *matCellDef="let element"> {{element.Phone}} </td>
       </ng-container>
       <ng-container matColumnDef="accionEdit">
         <th mat-header-cell *matHeaderCellDef>Edit </th>
         <td mat-cell *matCellDef="let element">
           <div class="example-button-container">
-            <button mat-mini-fab color="warn" (click)="editSupplier(element)">
+            <button mat-mini-fab color="warn" (click)="editShipper(element)">
               <mat-icon>edit</mat-icon>
             </button>
           </div>
@@ -38,7 +34,7 @@
         <th mat-header-cell *matHeaderCellDef>Delete </th>
         <td mat-cell *matCellDef="let element">
           <div class="example-button-container">
-            <button mat-mini-fab color="warn" (click)="deleteSupplier(element.SupplierID)">
+            <button mat-mini-fab color="warn" (click)="deleteShipper(element.ShipperID)">
               <mat-icon>delete</mat-icon>
             </button>
           </div>
@@ -52,8 +48,7 @@
     </table>
     <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
     </mat-paginator>
-    <button mat-raised-button class="addButton" color="accent" (click)="createNewSupplier()">Create new
-      Supplier</button>
+    <button mat-raised-button class="addButton" color="accent" (click)="createNewShipper()">Create new Shipper</button>
   </div>
 </div>
 <hr class="linea" style="color: #0056b2;" />

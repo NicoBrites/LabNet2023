@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ListSuppliersComponent } from './components/list-suppliers/list-suppliers.component';
-import { AdministratorSuppliersComponent } from './components/administrator-suppliers/administrator-suppliers.component';
+import { ListShippersComponent } from './components/list-shippers/list-shippers.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home'},
   { path: 'suppliers', component: ListSuppliersComponent},
-  { path: 'administrator', component: AdministratorSuppliersComponent},
+  { path: 'shippers', component: ListShippersComponent},
   {
     path:'dashboard',
     loadChildren: () => import('./components/dashboard/dashboard.module').then((x)=>x.DashboardModule),
