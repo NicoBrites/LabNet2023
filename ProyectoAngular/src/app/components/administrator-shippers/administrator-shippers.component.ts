@@ -1,8 +1,6 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SuppliersService } from '../service/suppliers.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SupplierUpdate } from 'src/app/core/models/mode-supplier-update';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ShippersService } from '../service/shippers.service';
 import { ShipperUpdate } from 'src/app/core/models/model-shipper-update';
