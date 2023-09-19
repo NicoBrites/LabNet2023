@@ -82,7 +82,6 @@ export class ListShippersComponent implements OnInit {
     this.shipperEnviado = { CompanyName, Phone }
     const dialogRef = this.dialog.open(AdministratorShippersComponent, { data: this.shipperEnviado })
     dialogRef.afterClosed().subscribe(res => {
-      console.log(res)
       if (res != false && res != null) {
         this.shippersService.updateShipper(shipper.ShipperID, res).subscribe({
           complete: () => {
