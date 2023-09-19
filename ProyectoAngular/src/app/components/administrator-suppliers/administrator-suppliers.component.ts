@@ -43,7 +43,7 @@ export class AdministratorSuppliersComponent implements OnInit {
   }
 
   noCaracteresEspeciales(control: AbstractControl): Validators | null {
-    const caracteresEspeciales = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
+    const caracteresEspeciales = /[!@#$%^&*'()_+{}\[\]:;<>,.?~\\/-]/;
   
     if (caracteresEspeciales.test(control.value)) {
       return { caracteresEspeciales: true };
@@ -58,7 +58,7 @@ export class AdministratorSuppliersComponent implements OnInit {
       contactName: [''.trim(), [Validators.maxLength(30), this.noCaracteresEspeciales]],
       contactTitle: [''.trim(), [Validators.maxLength(30), this.noCaracteresEspeciales]]
     });
-    if (this.supplierUpdate.CompanyName !== "ESTOYVALIDANDOQUENOESUNEDIT")
+    if (this.supplierUpdate.CompanyName !== "ESTOYVALIDANDOQUENOESUNEDIT-")
     {
       console.log("asd")
       this.form.setValue({

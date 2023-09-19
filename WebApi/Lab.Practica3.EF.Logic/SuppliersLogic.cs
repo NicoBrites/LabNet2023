@@ -53,8 +53,8 @@ namespace Lab.Practica3.EF.Logic
         }
         public bool Add(Suppliers supplier)
         {
-            if (Validator.ValidarCaracteresEspeciales(supplier))
-            {
+            //if (Validator.ValidarCaracteresEspeciales(supplier)) 
+            //{                                          
                 if (supplier.CompanyName != null && supplier.CompanyName.Length > 40 ||
                    (supplier.ContactName != null && supplier.ContactName.Length > 30) ||
                    (supplier.ContactTitle != null && supplier.ContactTitle.Length > 30))
@@ -70,8 +70,8 @@ namespace Lab.Practica3.EF.Logic
                     context.Suppliers.Add(supplier);
                     return context.SaveChanges() > 0;
                 }
-            }
-            throw new Exception("Error! Ingresaste un caracter especial.");
+            //}
+            //throw new Exception("Error! Ingresaste un caracter especial.");
         }
 
         public bool Update(Suppliers supplier)
@@ -79,9 +79,9 @@ namespace Lab.Practica3.EF.Logic
             var supplierUpdate = context.Suppliers.Find(supplier.SupplierID);
             if (supplierUpdate != null)
             {
-                if (Validator.ValidarCaracteresEspeciales(supplier))
-                {
-                    if (supplier.CompanyName != null && supplier.CompanyName.Length > 40 ||
+                // if (Validator.ValidarCaracteresEspeciales(supplier)) Las tuve que sacar porque en la db
+                //{                                        hay muchos nombres con comilla simple y me genera conflicto 
+                if (supplier.CompanyName != null && supplier.CompanyName.Length > 40 ||
                     (supplier.ContactName != null && supplier.ContactName.Length > 30) ||
                     (supplier.ContactTitle != null && supplier.ContactTitle.Length > 30))
                     {
@@ -99,8 +99,8 @@ namespace Lab.Practica3.EF.Logic
 
                         return context.SaveChanges() > 0;
                     }
-                }
-                throw new Exception("Error! Ingresaste un caracter especial.");
+               // }
+               // throw new Exception("Error! Ingresaste un caracter especial.");
             }
             else
             {

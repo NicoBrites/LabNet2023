@@ -105,7 +105,7 @@ export class ListSuppliersComponent implements OnInit{
   }
 
   createNewSupplier(){
-    var CompanyName = "ESTOYVALIDANDOQUENOESUNEDIT";
+    var CompanyName = "ESTOYVALIDANDOQUENOESUNEDIT-";
     var ContactName = "";
     var ContactTitle = "";
     this.supplierEnviado = {CompanyName ,ContactName, ContactTitle }
