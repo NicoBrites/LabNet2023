@@ -11,6 +11,7 @@ import { AdministratorSuppliersComponent } from '../administrator-suppliers/admi
 import { SupplierUpdate } from 'src/app/core/models/mode-supplier-update';
 import { ActivatedRoute } from '@angular/router';
 
+
 @Component({
   selector: 'app-list-suppliers',
   templateUrl: './list-suppliers.component.html',
@@ -63,7 +64,7 @@ export class ListSuppliersComponent implements OnInit {
 
   deleteSupplier(supplierId: number) {
     const dialogRef = this.dialog.open(DialogBoxComponent, {})
-
+    
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.suppliersService.deleteSupplier(supplierId).subscribe({

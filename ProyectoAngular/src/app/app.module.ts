@@ -13,6 +13,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ListShippersComponent } from './components/list-shippers/list-shippers.component';
 import { AdministratorShippersComponent } from './components/administrator-shippers/administrator-shippers.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

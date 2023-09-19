@@ -4,7 +4,7 @@
 <div class="bodyHome">
   <mat-form-field>
     <mat-label>Filter </mat-label>
-    <input class="filterInput" matInput (keyup)="applyFilter($event)" placeholder="Sino no ves la lista" #input>
+    <input class="filterInput" matInput (keyup)="applyFilter($event)" placeholder="Ej: Las cabras" #input>
   </mat-form-field>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
