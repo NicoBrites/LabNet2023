@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SuppliersService } from '../service/suppliers.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SupplierUpdate } from 'src/app/core/models/mode-supplier-update';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -17,8 +16,8 @@ export class AdministratorSuppliersComponent implements OnInit {
 
   form!: FormGroup;
 
-  constructor(private readonly fb: FormBuilder,  private service: SuppliersService, 
-    private _snackBar: MatSnackBar, public dialogRef: MatDialogRef<AdministratorSuppliersComponent>,
+  constructor(private readonly fb: FormBuilder, private _snackBar: MatSnackBar,
+     public dialogRef: MatDialogRef<AdministratorSuppliersComponent>,
     @Inject(MAT_DIALOG_DATA) public supplierUpdate: SupplierUpdate ) {}
 
   //Getters
@@ -60,7 +59,6 @@ export class AdministratorSuppliersComponent implements OnInit {
     });
     if (this.supplierUpdate.CompanyName !== "ESTOYVALIDANDOQUENOESUNEDIT-")
     {
-      console.log("asd")
       this.form.setValue({
         companyName: this.supplierUpdate.CompanyName,
         contactName: this.supplierUpdate.ContactName,
@@ -82,7 +80,6 @@ export class AdministratorSuppliersComponent implements OnInit {
     var ContactName = this.contactNameGet.value;
     var ContactTitle= this.contactTitleGet.value;
     this.supplierUpdate = {CompanyName, ContactName, ContactTitle}
-    console.log("entro al update del administrator")
     return this.supplierUpdate
   }
 

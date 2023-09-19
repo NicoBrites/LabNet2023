@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Supplier } from 'src/app/core/models/model-supplier';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -9,7 +9,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { AdministratorSuppliersComponent } from '../administrator-suppliers/administrator-suppliers.component';
 import { SupplierUpdate } from 'src/app/core/models/mode-supplier-update';
-import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -18,7 +17,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./list-suppliers.component.css']
 })
 export class ListSuppliersComponent implements OnInit {
-
 
   public supplierEnviado!: SupplierUpdate
 
@@ -32,10 +30,7 @@ export class ListSuppliersComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private suppliersService: SuppliersService,
-    private _snackBar: MatSnackBar, private dialog: MatDialog,
-    private route: ActivatedRoute) {
-
-  }
+    private _snackBar: MatSnackBar, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getAllSuppliers();
@@ -68,11 +63,9 @@ export class ListSuppliersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.suppliersService.deleteSupplier(supplierId).subscribe({
-
           complete: () => {
             this.openSnackBar('Supplier eliminado!', 'Okey')
-            setTimeout(this.refresh, 3000);
-
+            setTimeout(this.refresh, 2000);
           },
           error: (err) => {
             alert(err.error.Message);
@@ -89,12 +82,11 @@ export class ListSuppliersComponent implements OnInit {
     this.supplierEnviado = { CompanyName, ContactName, ContactTitle }
     const dialogRef = this.dialog.open(AdministratorSuppliersComponent, { data: this.supplierEnviado })
     dialogRef.afterClosed().subscribe(res => {
-      console.log(res)
       if (res != false && res != null) {
         this.suppliersService.updateSupplier(supplier.SupplierID, res).subscribe({
           complete: () => {
             this.openSnackBar('Supplier updateado!', 'Okey')
-            setTimeout(this.refresh, 3000);
+            setTimeout(this.refresh, 2000);
           },
           error: (err) => {
             alert(err.error.message);
@@ -111,13 +103,11 @@ export class ListSuppliersComponent implements OnInit {
     this.supplierEnviado = { CompanyName, ContactName, ContactTitle }
     const dialogRef = this.dialog.open(AdministratorSuppliersComponent, { data: this.supplierEnviado })
     dialogRef.afterClosed().subscribe(res => {
-      console.log(res)
       if (res != false && res != null) {
-        this.suppliersService.postSupplier(res).subscribe({
+        this.suppliersService.postSupplier(res).subscribe({  
           complete: () => {
             this.openSnackBar('Supplier creado!', 'Okey')
-            setTimeout(this.refresh, 3000);
-
+            setTimeout(this.refresh, 2000);
           },
           error: (err) => {
             alert(err.error.message);

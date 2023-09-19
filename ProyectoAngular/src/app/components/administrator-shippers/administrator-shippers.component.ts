@@ -2,7 +2,6 @@ import { Component, OnInit, Inject, Input } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ShippersService } from '../service/shippers.service';
 import { ShipperUpdate } from 'src/app/core/models/model-shipper-update';
 
 
@@ -16,8 +15,8 @@ export class AdministratorShippersComponent implements OnInit {
 
   form!: FormGroup;
 
-  constructor(private readonly fb: FormBuilder, private service: ShippersService,
-    private _snackBar: MatSnackBar, public dialogRef: MatDialogRef<AdministratorShippersComponent>,
+  constructor(private readonly fb: FormBuilder, private _snackBar: MatSnackBar, 
+    public dialogRef: MatDialogRef<AdministratorShippersComponent>,
     @Inject(MAT_DIALOG_DATA) public shipperUpdate: ShipperUpdate) { }
 
   //Getters
@@ -53,7 +52,6 @@ export class AdministratorShippersComponent implements OnInit {
       Phone: [''.trim(), [Validators.maxLength(24), this.noCaracteresEspeciales]],
     });
     if (this.shipperUpdate.CompanyName !== "ESTOYVALIDANDOQUENOESUNEDIT-") {
-      console.log("asd")
       this.form.setValue({
         companyName: this.shipperUpdate.CompanyName,
         Phone: this.shipperUpdate.Phone,
@@ -73,7 +71,6 @@ export class AdministratorShippersComponent implements OnInit {
     var CompanyName = this.companyNameGet.value;
     var Phone = this.PhoneGet.value;
     this.shipperUpdate = { CompanyName, Phone }
-    console.log("entro al update del administrator")
     return this.shipperUpdate
   }
 

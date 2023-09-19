@@ -6,7 +6,6 @@ import { ShippersService } from '../service/shippers.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
-import { ActivatedRoute } from '@angular/router';
 import { ShipperUpdate } from 'src/app/core/models/model-shipper-update';
 import { Shipper } from 'src/app/core/models/model-shipper';
 import { AdministratorShippersComponent } from '../administrator-shippers/administrator-shippers.component';
@@ -30,8 +29,7 @@ export class ListShippersComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private shippersService: ShippersService,
-    private _snackBar: MatSnackBar, private dialog: MatDialog,
-    private route: ActivatedRoute) {
+    private _snackBar: MatSnackBar, private dialog: MatDialog) {
 
   }
 
@@ -66,11 +64,9 @@ export class ListShippersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.shippersService.deleteShipper(shipperId).subscribe({
-
           complete: () => {
             this.openSnackBar('Shipper eliminado!', 'Okey')
-            setTimeout(this.refresh, 3000);
-
+            setTimeout(this.refresh, 2000);
           },
           error: (err) => {
             alert(err.error.Message);
@@ -91,7 +87,7 @@ export class ListShippersComponent implements OnInit {
         this.shippersService.updateShipper(shipper.ShipperID, res).subscribe({
           complete: () => {
             this.openSnackBar('Shipper updateado!', 'Okey')
-            setTimeout(this.refresh, 3000);
+            setTimeout(this.refresh, 2000);
           },
           error: (err) => {
             alert(err.error.message);
@@ -107,13 +103,11 @@ export class ListShippersComponent implements OnInit {
     this.shipperEnviado = { CompanyName, Phone }
     const dialogRef = this.dialog.open(AdministratorShippersComponent, { data: this.shipperEnviado })
     dialogRef.afterClosed().subscribe(res => {
-      console.log(res)
       if (res != false && res != null) {
         this.shippersService.postShipper(res).subscribe({
           complete: () => {
             this.openSnackBar('Shipper creado!', 'Okey')
-            setTimeout(this.refresh, 3000);
-
+            setTimeout(this.refresh, 2000);
           },
           error: (err) => {
             alert(err.error.message);
