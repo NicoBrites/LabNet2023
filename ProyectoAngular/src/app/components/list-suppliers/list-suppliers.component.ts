@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { AdministratorSuppliersComponent } from '../administrator-suppliers/administrator-suppliers.component';
 import { SupplierUpdate } from 'src/app/core/models/mode-supplier-update';
+import { SupplierSend } from 'src/app/core/models/model-supplier-send';
 
 
 @Component({
@@ -18,7 +19,7 @@ import { SupplierUpdate } from 'src/app/core/models/mode-supplier-update';
 })
 export class ListSuppliersComponent implements OnInit {
 
-  public supplierEnviado!: SupplierUpdate
+  public supplierEnviado!: SupplierSend
 
   suppliers: Supplier[] = []
 
@@ -79,8 +80,9 @@ export class ListSuppliersComponent implements OnInit {
     var CompanyName = supplier.CompanyName;
     var ContactName = supplier.ContactName;
     var ContactTitle = supplier.ContactTitle;
-    this.supplierEnviado = { CompanyName, ContactName, ContactTitle }
-    const dialogRef = this.dialog.open(AdministratorSuppliersComponent, { data: this.supplierEnviado })
+    var edit = true;
+    this.supplierEnviado = { CompanyName, ContactName, ContactTitle, edit }
+    const dialogRef = this.dialog.open(AdministratorSuppliersComponent, { data: this.supplierEnviado})
     dialogRef.afterClosed().subscribe(res => {
       if (res != false && res != null) {
         this.suppliersService.updateSupplier(supplier.SupplierID, res).subscribe({
@@ -100,7 +102,8 @@ export class ListSuppliersComponent implements OnInit {
     var CompanyName = "ESTOYVALIDANDOQUENOESUNEDIT-";
     var ContactName = "";
     var ContactTitle = "";
-    this.supplierEnviado = { CompanyName, ContactName, ContactTitle }
+    var edit = false;
+    this.supplierEnviado = { CompanyName, ContactName, ContactTitle, edit }
     const dialogRef = this.dialog.open(AdministratorSuppliersComponent, { data: this.supplierEnviado })
     dialogRef.afterClosed().subscribe(res => {
       if (res != false && res != null) {

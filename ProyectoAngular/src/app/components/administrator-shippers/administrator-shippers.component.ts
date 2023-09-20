@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ShipperUpdate } from 'src/app/core/models/model-shipper-update';
+import { ShipperSend } from 'src/app/core/models/model-shipper-send';
 
 
 
@@ -13,11 +14,12 @@ import { ShipperUpdate } from 'src/app/core/models/model-shipper-update';
 })
 export class AdministratorShippersComponent implements OnInit {
 
+  shipperUpdate! : ShipperUpdate;
   form!: FormGroup;
 
   constructor(private readonly fb: FormBuilder, private _snackBar: MatSnackBar, 
     public dialogRef: MatDialogRef<AdministratorShippersComponent>,
-    @Inject(MAT_DIALOG_DATA) public shipperUpdate: ShipperUpdate) { }
+    @Inject(MAT_DIALOG_DATA) public shipperSend: ShipperSend) { }
 
   //Getters
 
@@ -42,10 +44,10 @@ export class AdministratorShippersComponent implements OnInit {
       companyName: [''.trim(), [Validators.required, Validators.maxLength(40), this.noEspacioEnBlanco]],
       Phone: [''.trim(), [Validators.maxLength(24)]],
     });
-    if (this.shipperUpdate.CompanyName !== "ESTOYVALIDANDOQUENOESUNEDIT-") {
+    if (this.shipperSend.edit == true) {
       this.form.setValue({
-        companyName: this.shipperUpdate.CompanyName,
-        Phone: this.shipperUpdate.Phone,
+        companyName: this.shipperSend.CompanyName,
+        Phone: this.shipperSend.Phone,
       });
     }
 

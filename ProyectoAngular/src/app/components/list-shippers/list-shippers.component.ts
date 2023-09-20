@@ -9,6 +9,7 @@ import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { ShipperUpdate } from 'src/app/core/models/model-shipper-update';
 import { Shipper } from 'src/app/core/models/model-shipper';
 import { AdministratorShippersComponent } from '../administrator-shippers/administrator-shippers.component';
+import { ShipperSend } from 'src/app/core/models/model-shipper-send';
 
 @Component({
   selector: 'app-list-shippers',
@@ -17,7 +18,7 @@ import { AdministratorShippersComponent } from '../administrator-shippers/admini
 })
 export class ListShippersComponent implements OnInit {
 
-  public shipperEnviado!: ShipperUpdate
+  public shipperEnviado!: ShipperSend
 
   shippers: Shipper[] = []
 
@@ -79,7 +80,8 @@ export class ListShippersComponent implements OnInit {
   editShipper(shipper: Shipper) {
     var CompanyName = shipper.CompanyName;
     var Phone = shipper.Phone;
-    this.shipperEnviado = { CompanyName, Phone }
+    var edit = true;
+    this.shipperEnviado = { CompanyName, Phone, edit }
     const dialogRef = this.dialog.open(AdministratorShippersComponent, { data: this.shipperEnviado })
     dialogRef.afterClosed().subscribe(res => {
       if (res != false && res != null) {
@@ -99,7 +101,8 @@ export class ListShippersComponent implements OnInit {
   createNewShipper() {
     var CompanyName = "ESTOYVALIDANDOQUENOESUNEDIT-";
     var Phone = "";
-    this.shipperEnviado = { CompanyName, Phone }
+    var edit = false;
+    this.shipperEnviado = { CompanyName, Phone, edit }
     const dialogRef = this.dialog.open(AdministratorShippersComponent, { data: this.shipperEnviado })
     dialogRef.afterClosed().subscribe(res => {
       if (res != false && res != null) {

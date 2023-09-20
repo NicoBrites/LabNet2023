@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SupplierUpdate } from 'src/app/core/models/mode-supplier-update';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { SupplierSend } from 'src/app/core/models/model-supplier-send';
 
 
 
@@ -13,12 +14,12 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class AdministratorSuppliersComponent implements OnInit {
 
-
+  supplierUpdate! : SupplierUpdate;
   form!: FormGroup;
 
   constructor(private readonly fb: FormBuilder, private _snackBar: MatSnackBar,
      public dialogRef: MatDialogRef<AdministratorSuppliersComponent>,
-    @Inject(MAT_DIALOG_DATA) public supplierUpdate: SupplierUpdate ) {}
+    @Inject(MAT_DIALOG_DATA) public supplierSend: SupplierSend ) {}
 
   //Getters
   
@@ -57,12 +58,12 @@ export class AdministratorSuppliersComponent implements OnInit {
       contactName: [''.trim(), [Validators.maxLength(30)]],
       contactTitle: [''.trim(), [Validators.maxLength(30)]]
     });
-    if (this.supplierUpdate.CompanyName !== "ESTOYVALIDANDOQUENOESUNEDIT-")
+    if (this.supplierSend.edit == true)
     {
       this.form.setValue({
-        companyName: this.supplierUpdate.CompanyName,
-        contactName: this.supplierUpdate.ContactName,
-        contactTitle: this.supplierUpdate.ContactTitle
+        companyName: this.supplierSend.CompanyName,
+        contactName: this.supplierSend.ContactName,
+        contactTitle: this.supplierSend.ContactTitle
       });
     }
 
