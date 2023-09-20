@@ -6,4 +6,7 @@
 
 ```nmp instal```
 
+## En caso de no ser el mismo, configurar el localhost de la Api en:
+
+```ProyectoAngular\src\app\environments\environment.ts```
 
