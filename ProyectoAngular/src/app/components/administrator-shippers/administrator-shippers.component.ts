@@ -36,20 +36,11 @@ export class AdministratorShippersComponent implements OnInit {
     return null;
   }
 
-  noCaracteresEspeciales(control: AbstractControl): Validators | null {
-    const caracteresEspeciales = /[!@#$%^&*'()_+{}\[\]:;<>,.?~\\/-]/;
-
-    if (caracteresEspeciales.test(control.value)) {
-      return { caracteresEspeciales: true };
-    }
-
-    return null;
-  }
 
   ngOnInit(): void {
     this.form = this.fb.group({
       companyName: [''.trim(), [Validators.required, Validators.maxLength(40), this.noEspacioEnBlanco]],
-      Phone: [''.trim(), [Validators.maxLength(24), this.noCaracteresEspeciales]],
+      Phone: [''.trim(), [Validators.maxLength(24)]],
     });
     if (this.shipperUpdate.CompanyName !== "ESTOYVALIDANDOQUENOESUNEDIT-") {
       this.form.setValue({
