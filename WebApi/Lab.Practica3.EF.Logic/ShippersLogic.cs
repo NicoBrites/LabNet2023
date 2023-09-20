@@ -46,26 +46,7 @@ namespace Lab.Practica3.EF.Logic
         }
         public bool Add(Shippers shipper)
         {
-            if (shipper.CompanyName != null && shipper.CompanyName.Length > 40 ||
-                (shipper.Phone != null && shipper.Phone.Length > 24))
-            {
-                throw new Exception("Error! Te excediste de la cantidad maxima de caracteres");
-            }
-            else if (shipper.CompanyName == null || shipper.CompanyName == "")
-            {
-                throw new Exception("Error! El companyName no puede ser nulo");
-            }
-            else
-            {
-                context.Shippers.Add(shipper);
-                return context.SaveChanges() > 0;
-            }
-        }
-
-        public bool Update(Shippers shipper)
-        {
-            var shipperUpdate = context.Shippers.Find(shipper.ShipperID);
-            if (shipperUpdate != null)
+            if (Validator.ValidarCaracteresEspeciales(shipper))
             {
                 if (shipper.CompanyName != null && shipper.CompanyName.Length > 40 ||
                     (shipper.Phone != null && shipper.Phone.Length > 24))
@@ -78,11 +59,38 @@ namespace Lab.Practica3.EF.Logic
                 }
                 else
                 {
-                    shipperUpdate.CompanyName = shipper.CompanyName;
-                    shipperUpdate.Phone = shipper.Phone;
-
+                    context.Shippers.Add(shipper);
                     return context.SaveChanges() > 0;
                 }
+            }
+            throw new Exception("Error! El dato que ingreso no debe contener caracteres especiales");
+        }
+
+        public bool Update(Shippers shipper)
+        {
+            var shipperUpdate = context.Shippers.Find(shipper.ShipperID);
+            if (shipperUpdate != null)
+            {
+                if (Validator.ValidarCaracteresEspeciales(shipper))
+                {
+                    if (shipper.CompanyName != null && shipper.CompanyName.Length > 40 ||
+                    (shipper.Phone != null && shipper.Phone.Length > 24))
+                    {
+                        throw new Exception("Error! Te excediste de la cantidad maxima de caracteres");
+                    }
+                    else if (shipper.CompanyName == null || shipper.CompanyName == "")
+                    {
+                        throw new Exception("Error! El companyName no puede ser nulo");
+                    }
+                    else
+                    {
+                        shipperUpdate.CompanyName = shipper.CompanyName;
+                        shipperUpdate.Phone = shipper.Phone;
+
+                        return context.SaveChanges() > 0;
+                    }
+                }
+                throw new Exception("Error! El dato que ingreso no debe contener caracteres especiales");
             }
             else
             {
